@@ -20,16 +20,15 @@
     }
   </script>
   
-  <!-- svelte-ignore missing_declaration -->
   <svelte:head>
-    <title>Otvoreni Dućani</title>  
+    <title>Najdijabetolog</title>  
     {#if fetchCache}
       <template id="loaded-data" style="display:none">{browser?'':Buffer.from(JSON.stringify(fetchCache)).toString('base64')}</template>
     {/if}
   </svelte:head>
   <div class="navbar bg-[#5b3de1] text-[black]">
     <div class="navbar-start">
-      <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl">Otvoreni Dućani</a>
+      <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl">Najdijabetolog</a>
     </div>
     <div class="navbar-end">
       {#if $page.url.pathname.startsWith('/upravljanje') && $user}

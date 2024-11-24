@@ -9,18 +9,18 @@ export async function load() {
     //if (stores) {
 		//console.log(stores);
 		const topDoctors = [
-			{ id: 1, name: 'Dr. Alice Johnson', specialization: 'Cardiology', rating: 4.8 },
-			{ id: 2, name: 'Dr. Bob Smith', specialization: 'Orthopedics', rating: 4.7 },
+			{ id: 1, name: 'Dr. Ivan Goran Kovačić', rating: 4.8 },
+			{ id: 2, name: 'Dr. Dobriša Cesarić', rating: 4.7 },
 		];
 	
 		const popularHospitals = [
-			{ id: 1, name: 'City Hospital', city: 'New York', doctors: 20 },
-			{ id: 2, name: 'Green Valley Clinic', city: 'Los Angeles', doctors: 15 },
+			{ id: 1, name: 'Bolnica 1', city: 'Zagreb', doctors: 20 },
+			{ id: 2, name: 'Bolnica 2', city: 'Split', doctors: 15 },
 		];
 	
 		const topCities = [
-			{ id: 1, name: 'New York', hospitals: 10 },
-			{ id: 2, name: 'Los Angeles', hospitals: 8 },
+			{ id: 1, name: 'Zagreb', hospitals: 10 },
+			{ id: 2, name: 'Split', hospitals: 8 },
 		];
 	
 		return {
