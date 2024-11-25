@@ -20,9 +20,9 @@
             {#if data.topDoctors.length}
                 {#each data.topDoctors as doctor}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
-                        <h3 class="text-2xl font-bold text-gray-800">{doctor.name}</h3>
+                        <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
                         <!--<p class="text-gray-600 italic">{doctor.specialization}</p>-->
-                        <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.rating.toFixed(1)}</p>
+                        <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.ratings.toFixed(1)}</p>
                     </div>
                 {/each}
             {:else}
@@ -40,12 +40,12 @@
             Najpopularnije ustanove
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if data.popularHospitals.length}
-                {#each data.popularHospitals as hospital}
+            {#if data.popularInstitutions.length}
+                {#each data.popularInstitutions as institution}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
-                        <h3 class="text-2xl font-bold text-gray-800">{hospital.name}</h3>
-                        <p class="text-gray-600">Lokacija: <span class="font-semibold">{hospital.city}</span></p>
-                        <p class="text-gray-500 mt-2">{hospital.doctors} dijabetologa</p>
+                        <h3 class="text-2xl font-bold text-gray-800">{institution.name}</h3>
+                        <p class="text-gray-600">Lokacija: <span class="font-semibold">{institution.city.name}</span></p>
+                        <p class="text-gray-500 mt-2">{institution.doctors} dijabetologa</p>
                     </div>
                 {/each}
             {:else}
@@ -67,7 +67,7 @@
                 {#each data.topCities as city}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{city.name}</h3>
-                        <p class="text-gray-500 mt-2">{city.hospitals} ustanova</p>
+                        <p class="text-gray-500 mt-2">{city.institutions} ustanova</p>
                     </div>
                 {/each}
             {:else}

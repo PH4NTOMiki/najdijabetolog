@@ -19,26 +19,36 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
-		interface Store {
+		interface City {
 			id: number;
-			default_start: string | null[];
-			default_end: string | null[];
-			distance: number?;
-			current_start: string?;
-			current_end: string?;
 			created_at: string;
-			address: string;
-			town: string;
-			coordinate_x: number;
-			coordinate_y: number;
-			title: string;
-			store_days: {
-				id: number;
-				store_id: number;
-				date: string;
-				start: string | null;
-				end: string | null
-			}[];
+			name: string;
+		}
+		interface Institution {
+			id: number;
+			created_at: string;
+			name: string;
+			city: City;
+		}
+		interface Doctor {
+			id: number;
+			created_at: string;
+			first_name: string;
+			last_name: string;
+			city: City;
+			institution: Institution;
+			ratings: number;
+		}
+		interface Review {
+			id: number;
+			created_at: string;
+			doctor: Doctor;
+			comment: string;
+			created_by: string;
+			ratingSkill: number;
+			ratingKindness: number;
+			ratingEthicality: number;
+			ratingInstitution: number;
 		}
 	}
 	L = import('@types/leaflet')
