@@ -26,7 +26,7 @@
       <template id="loaded-data" style="display:none">{browser?'':Buffer.from(JSON.stringify(fetchCache)).toString('base64')}</template>
     {/if}
   </svelte:head>
-  <div class="navbar bg-[#5b3de1] text-[black]">
+  <div class="navbar bg-[#ff8282] text-[black]">
     <div class="navbar-start">
       <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl">Najdijabetolog</a>
     </div>
