@@ -19,7 +19,6 @@
         <div class="flex-1 space-y-6">
             <div>
                 <h1 class="text-4xl font-bold text-gray-800">{data.doctor.first_name}</h1>
-                <p class="text-xl text-blue-600">{data.doctor.specialization}</p>
             </div>
             <div>
                 <p class="text-gray-600">{data.doctor.bio}</p>

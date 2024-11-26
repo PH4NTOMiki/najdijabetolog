@@ -38,6 +38,7 @@ declare global {
 			city: City;
 			institution: Institution;
 			ratings: number;
+			bio: string;
 		}
 		interface Review {
 			id: number;
