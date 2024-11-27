@@ -8,7 +8,7 @@
     let searchQuery = $state('');
 
     // Filter institutions based on search query
-    $: filteredInstitutions = $derived(institutions.filter(
+    let filteredInstitutions = $derived(institutions.filter(
         (institution) =>
             institution.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             institution.city.name.toLowerCase().includes(searchQuery.toLowerCase())

@@ -1,6 +1,7 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
+    let { topDoctors, popularInstitutions, topCities } = data;
 </script>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
@@ -19,8 +20,8 @@
         </h2>
         </a>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if data.topDoctors.length}
-                {#each data.topDoctors as doctor}
+            {#if topDoctors.length}
+                {#each topDoctors as doctor}
                 <a href="/doktori/{doctor.id}">
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
@@ -44,8 +45,8 @@
             Najpopularnije ustanove
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if data.popularInstitutions.length}
-                {#each data.popularInstitutions as institution}
+            {#if popularInstitutions.length}
+                {#each popularInstitutions as institution}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{institution.name}</h3>
                         <p class="text-gray-600">Lokacija: <span class="font-semibold">{institution.city.name}</span></p>
@@ -67,8 +68,8 @@
             Najbolji gradovi
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if data.topCities.length}
-                {#each data.topCities as city}
+            {#if topCities.length}
+                {#each topCities as city}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{city.name}</h3>
                         <p class="text-gray-500 mt-2">{city.institutions} ustanova</p>
