@@ -1,7 +1,7 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
-    let { doctor } = data;
+    let { doctor, reviews } = data;
 </script>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
@@ -26,7 +26,7 @@
             </div>
             <div class="flex items-center space-x-4">
                 <p class="text-yellow-500 font-bold text-xl">⭐ {doctor.ratings.toFixed(1)}</p>
-                <p class="text-gray-500">{doctor.reviews} reviews</p>
+                <p class="text-gray-500">{reviews.length} recenzija</p>
             </div>
         </div>
     </div>

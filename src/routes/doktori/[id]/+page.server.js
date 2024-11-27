@@ -7,9 +7,13 @@ export async function load({ params: {id} }) {
 	// @ts-ignore
 	const { data: doctor } = await db.from('doctors').select('*, institution (*), city (*)').eq('id', id).limit(1).single();
 
+    /** @type {{data: App.Review[]}} */
+	// @ts-ignore
+	const { data: reviews } = await db.from('reviews').select('*, doctor (*)').eq('doctor', id);
+
     /*if (!doctor) {
         throw new Error('Doctor not found');
     }*/
 
-    return { doctor };
+    return { doctor, reviews };
 }
