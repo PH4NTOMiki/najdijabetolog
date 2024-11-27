@@ -38,20 +38,24 @@
 
     <!-- Popular Hospitals Section -->
     <section class="bg-green-50 rounded-lg py-8 px-6 shadow-lg">
+        <a href="/ustanove">
         <h2 class="text-3xl font-semibold text-green-600 mb-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3H5a2 2 0 0 0-2 2v14h6v-4h6v4h6V5a2 2 0 0 0-2-2zm0 16h-4v-4H9v4H5V5h14v14zM7 7h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2z" />
             </svg>
             Najpopularnije ustanove
         </h2>
+        </a>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#if popularInstitutions.length}
                 {#each popularInstitutions as institution}
-                    <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
+                <a href="/ustanove/{institution.id}">
+                <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{institution.name}</h3>
                         <p class="text-gray-600">Lokacija: <span class="font-semibold">{institution.city.name}</span></p>
                         <p class="text-gray-500 mt-2">{institution.doctors} dijabetologa</p>
                     </div>
+                </a>
                 {/each}
             {:else}
                 <p class="text-gray-500">No hospitals available.</p>
