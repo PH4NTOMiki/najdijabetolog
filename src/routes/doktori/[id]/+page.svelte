@@ -130,7 +130,7 @@
                             </div>
                         </div>
 
-                        <p class="text-gray-600 mt-2">{review.reviews}</p>
+                        <p class="text-gray-600 mt-2">{review.comment}</p>
                     </div>
                 {/each}
             </div>
