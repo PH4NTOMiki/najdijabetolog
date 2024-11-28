@@ -29,6 +29,9 @@ declare global {
 			created_at: string;
 			name: string;
 			city: City;
+			number_of_doctors: number;
+			rating: number;
+			bio: string;
 		}
 		interface Doctor {
 			id: number;

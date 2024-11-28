@@ -10,7 +10,8 @@
     <div class="mb-12">
         <h1 class="text-4xl font-bold text-gray-800">{institution.name}</h1>
         <p class="text-gray-600 text-lg">{institution.city.name}</p>
-        <p class="text-yellow-500 font-bold text-xl mt-2">⭐ {(institution.rating??0).toFixed(1)}</p>
+        <p class="text-gray-600 text-lg">{institution.bio}</p>
+        <p class="text-yellow-500 font-bold text-xl mt-2">⭐ {institution.rating.toFixed(1)}</p>
     </div>
 
     <!-- Doctors List -->
