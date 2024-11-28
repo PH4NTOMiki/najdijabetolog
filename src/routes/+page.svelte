@@ -52,7 +52,7 @@
                 <a href="/ustanove/{institution.id}">
                 <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{institution.name}</h3>
-                        <p class="text-gray-600">Grad: <span class="font-semibold">{institution.city.name}</span></p>
+                        <p class="text-gray-600"><span class="font-semibold">{institution.city.name}</span></p>
                         <p class="text-gray-500 mt-2">{institution.number_of_doctors} dijabetologa</p>
                     </div>
                 </a>
