@@ -41,6 +41,10 @@ declare global {
 			city: City;
 			institution: Institution;
 			rating: number;
+			ratingSkill: number;
+			ratingKindness: number;
+			ratingEthicality: number;
+			ratingInstitution: number;
 			bio: string;
 		}
 		interface Review {
@@ -49,6 +53,7 @@ declare global {
 			doctor: Doctor;
 			comment: string;
 			created_by: string;
+			rating: number;
 			ratingSkill: number;
 			ratingKindness: number;
 			ratingEthicality: number;
