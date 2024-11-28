@@ -26,7 +26,7 @@
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
                         <!--<p class="text-gray-600 italic">{doctor.specialization}</p>-->
-                        <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.ratings.toFixed(1)}</p>
+                        <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.rating.toFixed(1)}</p>
                     </div>
                 </a>
                 {/each}

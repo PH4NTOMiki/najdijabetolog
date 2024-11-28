@@ -35,7 +35,7 @@
             <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition duration-200">
                     <h2 class="text-xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h2>
                     <p class="text-gray-500">Institution: {doctor.institution.name}</p>
-                    <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.ratings.toFixed(1)}</p>
+                    <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.rating.toFixed(1)}</p>
                     <button
                         class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
                     >

@@ -5,10 +5,8 @@ import {error} from '@sveltejs/kit'
 export async function load() {
 	/** @type {{data: App.Doctor[]}} */
 	// @ts-ignore
-	const { data: doctors } = await db.from('doctors').select('*, institution (*), city (*)');
-    //if (doctors) {
-		console.log('doctors', doctors);
-		const topDoctors = doctors.sort((a, b) => b.ratings - a.ratings).slice(0, 10);
+	const { data: doctors } = await db.from('doctors').select('*, institution (*), city (*)').order('rating', {ascending: false});
+    //if (doctors) {;
 
 		/** @type {{data: App.Institution[]}} */
 		// @ts-ignore
@@ -19,7 +17,7 @@ export async function load() {
 		const { data: cities } = await db.from('cities').select('*');
 	
 		return {
-			topDoctors,
+			topDoctors: doctors,
 			popularInstitutions: institutions,
 			topCities: cities,
 		};

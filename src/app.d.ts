@@ -40,7 +40,7 @@ declare global {
 			last_name: string;
 			city: City;
 			institution: Institution;
-			ratings: number;
+			rating: number;
 			bio: string;
 		}
 		interface Review {

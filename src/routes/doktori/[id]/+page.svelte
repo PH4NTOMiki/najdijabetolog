@@ -28,7 +28,7 @@
         <div class="flex-1 space-y-4">
             <h1 class="text-4xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h1>
             <p class="text-gray-600">{doctor.bio}</p>
-            <p class="text-yellow-500 font-bold text-xl">⭐ {doctor.ratings.toFixed(1)}</p>
+            <p class="text-yellow-500 font-bold text-xl">⭐ {doctor.rating.toFixed(1)}</p>
         </div>
     </div>
 

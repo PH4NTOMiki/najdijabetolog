@@ -24,7 +24,7 @@
                 <a href={`/doktori/${doctor.id}`}>
                     <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition">
                         <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
-                        <p class="text-yellow-500 font-bold text-lg">⭐ {doctor.ratings.toFixed(1)}</p>
+                        <p class="text-yellow-500 font-bold text-lg">⭐ {doctor.rating.toFixed(1)}</p>
                         <button
                             class="block mt-4 text-blue-600 hover:underline"
                         >
