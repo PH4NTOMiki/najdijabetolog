@@ -9,7 +9,11 @@
 
     // Filter doctors based on search query
     // @ts-ignore
-    let filteredDoctors = $derived(doctors.filter(doctor => `${doctor.first_name} ${doctor.last_name}`.toLowerCase().includes(searchQuery.toLowerCase())));
+    let filteredDoctors = $derived(doctors.filter(
+        (doctor) =>
+            doctor.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            doctor.last_name.toLowerCase().includes(searchQuery.toLowerCase())
+    ));
 </script>
 <svelte:head><title>Dijabetolozi - Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
@@ -34,7 +38,7 @@
             <a href={`/doktori/${doctor.id}`}>
             <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition duration-200">
                     <h2 class="text-xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h2>
-                    <p class="text-gray-500">Institution: {doctor.institution.name}</p>
+                    <p class="text-gray-500">{doctor.institution.name}</p>
                     <p class="text-yellow-500 font-semibold mt-2">⭐ {doctor.rating.toFixed(1)}</p>
                     <button
                         class="inline-block mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
