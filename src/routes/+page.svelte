@@ -64,7 +64,7 @@
     </section>
 
     <!-- Top Cities Section -->
-    <section class="bg-purple-50 rounded-lg py-8 px-6 shadow-lg">
+    <!--<section class="bg-purple-50 rounded-lg py-8 px-6 shadow-lg">
         <h2 class="text-3xl font-semibold text-purple-600 mb-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2a10 10 0 0 1 10 10v10H2V12a10 10 0 0 1 10-10zm0 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-11V6h2v3h3v2h-3v3h-2v-3H8v-2h3z" />
@@ -83,6 +83,6 @@
                 <p class="text-gray-500">No cities available.</p>
             {/if}
         </div>
-    </section>
+    </section>-->
 
 </div>
