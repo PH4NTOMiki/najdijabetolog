@@ -49,7 +49,7 @@
                 </a>
             {/each}
         {:else}
-            <p class="text-gray-500 col-span-full text-center">No doctors found.</p>
+            <p class="text-gray-500 col-span-full text-center">Ne možemo pronaći dijabetologa po Vašem upitu.</p>
         {/if}
     </div>
 </div>

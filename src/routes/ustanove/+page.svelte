@@ -47,7 +47,7 @@
             </a>
             {/each}
         {:else}
-            <p class="text-gray-500 col-span-full text-center">No institutions found.</p>
+            <p class="text-gray-500 col-span-full text-center">Ne možemo pronaći ustanovu po Vašem upitu.</p>
         {/if}
     </div>
 </div>

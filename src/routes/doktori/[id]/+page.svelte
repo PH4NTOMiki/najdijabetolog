@@ -135,7 +135,7 @@
                 {/each}
             </div>
         {:else}
-            <p class="text-gray-500">No reviews yet for this doctor.</p>
+            <p class="text-gray-500">Ovaj dijabetolog još nema recenzija.</p>
         {/if}
     </div>
 </div>

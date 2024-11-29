@@ -14,12 +14,12 @@ export async function load() {
 
 		/** @type {{data: App.City[]}} */
 		// @ts-ignore
-		const { data: cities } = await db.from('cities').select('*').limit(12);
+		//const { data: cities } = await db.from('cities').select('*').limit(12);
 	
 		return {
 			topDoctors: doctors,
 			popularInstitutions: institutions,
-			topCities: cities,
+			//topCities: cities,
 		};
 	//}
 

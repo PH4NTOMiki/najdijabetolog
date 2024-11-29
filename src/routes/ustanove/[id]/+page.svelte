@@ -35,7 +35,7 @@
                 {/each}
             </div>
         {:else}
-            <p class="text-gray-500">No doctors found for this institution.</p>
+            <p class="text-gray-500">Ova ustanova još nema dijabetologa.</p>
         {/if}
     </div>
 </div>

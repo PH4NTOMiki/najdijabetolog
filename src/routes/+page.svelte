@@ -1,7 +1,7 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
-    let { topDoctors, popularInstitutions, topCities } = data;
+    let { topDoctors, popularInstitutions/*, topCities*/ } = data;
 </script>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
@@ -31,7 +31,7 @@
                 </a>
                 {/each}
             {:else}
-                <p class="text-gray-500">No doctors available.</p>
+                <p class="text-gray-500">Ne možemo pronaći najbolje dijabetologe u Vašem gradu.</p>
             {/if}
         </div>
     </section>
@@ -58,7 +58,7 @@
                 </a>
                 {/each}
             {:else}
-                <p class="text-gray-500">No hospitals available.</p>
+                <p class="text-gray-500">Ne možemo pronaći najpopularnije ustanove u Vašem gradu.</p>
             {/if}
         </div>
     </section>
@@ -80,7 +80,7 @@
                     </div>
                 {/each}
             {:else}
-                <p class="text-gray-500">No cities available.</p>
+                <p class="text-gray-500">Ne možemo pronaći najbolje gradove.</p>
             {/if}
         </div>
     </section>-->
