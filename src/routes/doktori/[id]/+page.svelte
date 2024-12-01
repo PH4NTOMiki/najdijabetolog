@@ -40,8 +40,8 @@
             if (!response.ok) throw new Error('');
 
             const addedReview = await response.json();
-            reviews.unshift(addedReview); // Update the reviews list dynamically
-            successMessage = 'Hvala vam! Vaša recenzija je uspješno dodana.';
+            //reviews.unshift(addedReview); // Update the reviews list dynamically
+            successMessage = 'Hvala vam! Vaša recenzija je uspješno dodana. Da bi bila vidljiva, morate potvrditi Vaš email.';
             newReview = { ratingSkill: 0, ratingKindness: 0, ratingEthicality: 0, ratingInstitution: 0, comment: '', created_by: '' };
         } catch (error) {
             // @ts-ignore
