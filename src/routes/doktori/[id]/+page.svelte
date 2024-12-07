@@ -86,7 +86,7 @@
         <div class="flex-1 space-y-6">
             <div>
                 <h1 class="text-4xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h1>
-                <h2 class="text-2xl text-gray-600">{doctor.institution.name}</h2>
+                <h2 class="text-2xl text-gray-600"><a href="/ustanove/{doctor.institution.id}">{doctor.institution.name}</a></h2>
                 <p class="text-gray-600">{doctor.bio}</p>
             </div>
 
