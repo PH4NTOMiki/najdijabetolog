@@ -20,10 +20,10 @@
 
     let newReview = $state({
         email: '',
-        ratingSkill: 0,
-        ratingKindness: 0,
-        ratingEthicality: 0,
-        ratingInstitution: 0,
+        ratingskill: 0,
+        ratingkindness: 0,
+        ratingethicality: 0,
+        ratinginstitution: 0,
         comment: '',
         created_by: ''
     });
@@ -54,7 +54,7 @@
             console.log(addedReview);
             //reviews.unshift(addedReview); // Update the reviews list dynamically
             successMessage = 'Hvala vam! Vaša recenzija je uspješno dodana. Da bi bila vidljiva, morate potvrditi Vaš email.';
-            newReview = { email: '', ratingSkill: 0, ratingKindness: 0, ratingEthicality: 0, ratingInstitution: 0, comment: '', created_by: '' };
+            newReview = { email: '', ratingskill: 0, ratingkindness: 0, ratingethicality: 0, ratinginstitution: 0, comment: '', created_by: '' };
         } catch (error) {
             // @ts-ignore
             errorMessage = error.message || 'Došlo je do greške prilikom dodavanja recenzije.';
@@ -63,9 +63,9 @@
 
     // Average ratings for each category
     const categories = [
-        { label: 'Stručnost', rating: doctor.ratingSkill },
-        { label: 'Ljubaznost', rating: doctor.ratingKindness },
-        { label: 'Etičnost', rating: doctor.ratingEthicality },
+        { label: 'Stručnost', rating: doctor.ratingskill },
+        { label: 'Ljubaznost', rating: doctor.ratingkindness },
+        { label: 'Etičnost', rating: doctor.ratingethicality },
         { label: 'Ustanova', rating: doctor.institution.rating },
     ];
 </script>
@@ -192,10 +192,10 @@
 
             <!-- Ratings -->
             {#each [
-                { label: 'Stručnost', key: 'ratingSkill' },
-                { label: 'Ljubaznost', key: 'ratingKindness' },
-                { label: 'Etičnost', key: 'ratingEthicality' },
-                { label: 'Ustanova', key: 'ratingInstitution' }
+                { label: 'Stručnost', key: 'ratingskill' },
+                { label: 'Ljubaznost', key: 'ratingkindness' },
+                { label: 'Etičnost', key: 'ratingethicality' },
+                { label: 'Ustanova', key: 'ratinginstitution' }
             ] as category}
                 <div>
                     <label class="block text-sm font-medium text-gray-700">{category.label}</label>
@@ -255,10 +255,10 @@
                         <h3 class="text-lg font-bold text-gray-800">{review.created_by}</h3>
 
                         {#each [
-                            { label: 'Stručnost', rating: review.ratingSkill },
-                            { label: 'Ljubaznost', rating: review.ratingKindness },
-                            { label: 'Etičnost', rating: review.ratingEthicality },
-                            { label: 'Ustanova', rating: review.ratingInstitution }
+                            { label: 'Stručnost', rating: review.ratingskill },
+                            { label: 'Ljubaznost', rating: review.ratingkindness },
+                            { label: 'Etičnost', rating: review.ratingethicality },
+                            { label: 'Ustanova', rating: review.ratinginstitution }
                         ] as category}
                             <div class="flex space-x-4 text-gray-600">
                                 <p>{category.label}:</p>

@@ -41,9 +41,9 @@ declare global {
 			city: City;
 			institution: Institution;
 			rating: number;
-			ratingSkill: number;
-			ratingKindness: number;
-			ratingEthicality: number;
+			ratingskill: number;
+			ratingkindness: number;
+			ratingethicality: number;
 			bio: string;
 		}
 		interface Review {
@@ -53,10 +53,10 @@ declare global {
 			comment: string;
 			created_by: string;
 			rating: number;
-			ratingSkill: number;
-			ratingKindness: number;
-			ratingEthicality: number;
-			ratingInstitution: number;
+			ratingskill: number;
+			ratingkindness: number;
+			ratingethicality: number;
+			ratinginstitution: number;
 		}
 	}
 	L = import('@types/leaflet')

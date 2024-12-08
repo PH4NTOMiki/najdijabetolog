@@ -3,7 +3,7 @@ import {db} from '$lib/db-server'; // Adjust according to your database setup
 
 export async function POST({ request }) {
     console.log('POST request received');
-    const { doctor_id, email, ratingSkill, ratingKindness, ratingEthicality, ratingInstitution, comment, created_by } = await request.json();
+    const { doctor_id, email, ratingskill, ratingkindness, ratingethicality, ratinginstitution, comment, created_by } = await request.json();
 
     if (!doctor_id || !created_by) {
         return json({ error: 'Missing required fields' }, { status: 400 });
@@ -12,10 +12,10 @@ export async function POST({ request }) {
     const {data, error:_error} = await db.from('reviews_temp').insert({
         doctor: doctor_id,
         email,
-        ratingSkill,
-        ratingKindness,
-        ratingEthicality,
-        ratingInstitution,
+        ratingskill,
+        ratingkindness,
+        ratingethicality,
+        ratinginstitution,
         comment,
         created_by
     }).select().single();
