@@ -19,6 +19,7 @@
     }
 
     let newReview = $state({
+        email: '',
         ratingSkill: 0,
         ratingKindness: 0,
         ratingEthicality: 0,
@@ -50,9 +51,10 @@
             if (!response.ok) throw new Error('');
 
             const addedReview = await response.json();
+            console.log(addedReview);
             //reviews.unshift(addedReview); // Update the reviews list dynamically
             successMessage = 'Hvala vam! Vaša recenzija je uspješno dodana. Da bi bila vidljiva, morate potvrditi Vaš email.';
-            newReview = { ratingSkill: 0, ratingKindness: 0, ratingEthicality: 0, ratingInstitution: 0, comment: '', created_by: '' };
+            newReview = { email: '', ratingSkill: 0, ratingKindness: 0, ratingEthicality: 0, ratingInstitution: 0, comment: '', created_by: '' };
         } catch (error) {
             // @ts-ignore
             errorMessage = error.message || 'Došlo je do greške prilikom dodavanja recenzije.';
@@ -173,6 +175,16 @@
                     id="created_by"
                     type="text"
                     bind:value={newReview.created_by}
+                    required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                />
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    bind:value={newReview.email}
                     required
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
