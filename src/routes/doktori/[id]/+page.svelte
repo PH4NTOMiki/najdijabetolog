@@ -205,6 +205,7 @@
                         {#each Array(5) as _, i}
                             <svg role="button" tabindex="0"
                                 onclick={() => (newReview[category.key] = i + 1)}
+                                onkeyup={() => (newReview[category.key] = i + 1)}
                                 class="w-6 h-6 cursor-pointer {i < newReview[category.key] ? 'text-yellow-500' : 'text-gray-300'}"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="{i < newReview[category.key] ? 'currentColor' : 'none'}"
@@ -262,8 +263,8 @@
                             { label: 'Etičnost', rating: review.ratingethicality },
                             { label: 'Ustanova', rating: review.ratinginstitution }
                         ] as category}
-                            <div class="flex space-x-4 text-gray-600">
-                                <p>{category.label}:</p>
+                            <div class="flex items-center space-x-4 text-gray-600 mb-2">
+                                <p class="w-32 font-medium">{category.label}:</p>
                                 <div class="flex" aria-label={`Rating: ${category.rating} out of 5`}>
                                     {#each renderStars(category.rating) as star}
                                         <svg
@@ -280,6 +281,7 @@
                                     {/each}
                                 </div>
                             </div>
+                            
                         {/each}
 
                         <p class="text-gray-600 mt-2">{review.comment}</p>
