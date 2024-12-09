@@ -48,8 +48,10 @@ declare global {
 		}
 		interface Review {
 			id: number;
+			email: string;
 			created_at: string;
 			doctor: Doctor;
+			instituion: Institution;
 			comment: string;
 			created_by: string;
 			rating: number;

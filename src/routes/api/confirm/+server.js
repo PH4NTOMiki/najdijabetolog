@@ -24,7 +24,7 @@ export async function GET({ url }) {
     }
 
     // Step 2: Insert the review into `reviews`
-    const { id, uuid: _, email: __, rating: ___, ...reviewData } = tempReview; // Remove sensitive fields
+    const { id, uuid: _, rating: ___, ...reviewData } = tempReview; // Remove sensitive fields
     const { error: insertError } = await db.from('reviews').insert(reviewData);
     console.log(insertError);
 

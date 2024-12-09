@@ -49,7 +49,7 @@
                 })
             });
 
-            if (!response.ok) throw new Error('');
+            if (!response.ok) throw new Error((await response.json()).error);
 
             const addedReview = await response.json();
             console.log(addedReview);

@@ -10,6 +10,17 @@ export async function POST({ request }) {
         return json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Check if the email already exists in the reviews table
+    const { data: existingReview, error: existingReviewError } = await db.from('reviews').select('*').eq('email', email).eq('doctor', doctor_id).single();
+    if (existingReviewError) {
+        console.error('Error checking existing review:', existingReviewError);
+        return json({ error: 'Greška, molimo pokušajte ponovo' }, { status: 500 });
+    }
+
+    if (existingReview) {
+        return json({ error: 'Već ste ostavili dojam za ovog doktora' }, { status: 400 });
+    }
+
     const {data, error:_error} = await db.from('reviews_temp').insert({
         doctor: doctor_id,
         email,
@@ -24,7 +35,7 @@ export async function POST({ request }) {
 
     if (_error) {
         console.error('Error inserting review:', _error);
-        return json({ error: 'Failed to insert review' }, { status: 500 });
+        return json({ error: 'Greška' }, { status: 500 });
     }
 
     console.log('Review inserted:', data);
