@@ -1,9 +1,10 @@
+import { dev } from '$app/environment';
 import { json } from '@sveltejs/kit';
 import {db} from '$lib/db-server'; // Adjust according to your database setup
 
 export async function POST({ request }) {
     console.log('POST request received');
-    const { doctor_id, email, ratingskill, ratingkindness, ratingethicality, ratinginstitution, comment, created_by } = await request.json();
+    const { doctor_id, email, institution_id, ratingskill, ratingkindness, ratingethicality, ratinginstitution, comment, created_by } = await request.json();
 
     if (!doctor_id || !created_by) {
         return json({ error: 'Missing required fields' }, { status: 400 });
@@ -12,6 +13,7 @@ export async function POST({ request }) {
     const {data, error:_error} = await db.from('reviews_temp').insert({
         doctor: doctor_id,
         email,
+        institution: institution_id,
         ratingskill,
         ratingkindness,
         ratingethicality,
@@ -31,7 +33,7 @@ export async function POST({ request }) {
         headers: {
             'Content-Type': 'text/html'
         },
-        body: `Molimo potvrdite ostavljanje recenzije na <a href="https://najdijabetolog.com/api/confirm?token=${data.uuid}&email=${email}">linku</a>.<br><br>Hvala,<br>NajDijabetolog.com`
+        body: `Molimo potvrdite ostavljanje recenzije na <a href="${dev?'http://localhost:3000':'https://najdijabetolog.com'}/api/confirm?token=${data.uuid}&email=${email}">linku</a>.<br><br>Hvala,<br>NajDijabetolog.com`
     });
 
     return json(data);

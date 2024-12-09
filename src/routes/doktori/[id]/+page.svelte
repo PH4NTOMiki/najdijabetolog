@@ -44,6 +44,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     doctor_id: doctor.id,
+                    institution_id: doctor.institution.id,
                     ...newReview
                 })
             });
