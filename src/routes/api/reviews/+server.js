@@ -7,7 +7,7 @@ export async function POST({ request }) {
     const { doctor_id, email, institution_id, ratingskill, ratingkindness, ratingethicality, ratinginstitution, comment, created_by } = await request.json();
 
     if (!doctor_id || !email || !institution_id || !ratingskill || !ratingkindness || !ratingethicality || !ratinginstitution || !comment || !created_by) {
-        return json({ error: 'Niste ispunili sva polja' }, { status: 400 });
+        return json({ error: 'Molimo popunite sva polja' }, { status: 400 });
     }
 
     // Check if the email already exists in the reviews table
