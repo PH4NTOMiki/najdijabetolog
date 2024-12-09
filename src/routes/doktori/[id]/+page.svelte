@@ -39,6 +39,10 @@
         errorMessage = '';
 
         try {
+            if (!doctor.id || !newReview.email || !doctor.institution.id || !newReview.ratingskill || !newReview.ratingkindness || !newReview.ratingethicality || !newReview.ratinginstitution || !newReview.comment || !newReview.created_by) {
+                throw new Error('Molimo popunite sva polja.');
+            }
+            
             const response = await fetch(`/api/reviews`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
