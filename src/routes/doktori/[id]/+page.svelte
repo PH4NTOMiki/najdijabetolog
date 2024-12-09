@@ -65,14 +65,6 @@
             errorMessage = error.message || 'Došlo je do greške prilikom dodavanja recenzije.';
         }
     }
-
-    // Average ratings for each category
-    const categories = [
-        { label: 'Stručnost', rating: doctor.ratingskill },
-        { label: 'Ljubaznost', rating: doctor.ratingkindness },
-        { label: 'Etičnost', rating: doctor.ratingethicality },
-        { label: 'Ustanova', rating: doctor.institution.rating },
-    ];
 </script>
 
 <svelte:head>
@@ -103,54 +95,59 @@
 
                 <!-- Ratings by Category -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {#each categories as category}
+                    {#each [
+                        { label: 'Stručnost', rating: doctor.ratingskill },
+                        { label: 'Ljubaznost', rating: doctor.ratingkindness },
+                        { label: 'Etičnost', rating: doctor.ratingethicality },
+                        { label: 'Ustanova', rating: doctor.institution.rating },
+                    ] as category}
                         <div class="text-center">
                             <p class="text-sm text-gray-600">{category.label}</p>
                             <div class="flex justify-center space-x-1 mt-1" aria-label={`Rating: ${category.rating} out of 5`}>
                                 {#each renderStars(category.rating) as type}
-                                {#if type === 'half'}
-            <!-- Half-Filled Star -->
-            <svg
-                class="w-6 h-6 text-gray-300"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-            >
-                <defs>
-                    <clipPath id="half-clip">
-                        <rect x="0" y="0" width="12" height="24" />
-                    </clipPath>
-                </defs>
-                <path
-                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    clip-path="url(#half-clip)"
-                    fill="#eab308"
-                />
-                <path
-                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-            </svg>
-        {:else}
-            <!-- Fully or Empty Star -->
-            <svg
-                class="w-6 h-6 {type === 'filled' ? 'text-yellow-500' : 'text-gray-300'}"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    fill="{type === 'filled' ? 'currentColor' : 'none'}"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-            </svg>
-        {/if}
+                                    {#if type === 'half'}
+                                        <!-- Half-Filled Star -->
+                                        <svg
+                                            class="w-6 h-6 text-gray-300"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <defs>
+                                                <clipPath id="half-clip">
+                                                    <rect x="0" y="0" width="12" height="24" />
+                                                </clipPath>
+                                            </defs>
+                                            <path
+                                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                                clip-path="url(#half-clip)"
+                                                fill="#eab308"
+                                            />
+                                            <path
+                                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    {:else}
+                                        <!-- Fully or Empty Star -->
+                                        <svg
+                                            class="w-6 h-6 {type === 'filled' ? 'text-yellow-500' : 'text-gray-300'}"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                                fill="{type === 'filled' ? 'currentColor' : 'none'}"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    {/if}
                                 {/each}
                             </div>
                             <p class="text-sm text-gray-600">{category.rating.toFixed(1)}</p>
