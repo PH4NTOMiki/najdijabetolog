@@ -28,7 +28,7 @@ export async function POST({ request }) {
     }
 
     console.log('Review inserted:', data);
-    await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&auth=mypwd1`, {
+    await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&subject=Povrdite ostavljanje dojma&auth=mypwd1`, {
         method: 'POST',
         headers: {
             'Content-Type': 'text/html'
