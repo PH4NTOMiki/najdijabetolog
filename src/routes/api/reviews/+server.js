@@ -39,13 +39,14 @@ export async function POST({ request }) {
     }
 
     console.log('Review inserted:', data);
-    await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&subject=Povrdite ostavljanje dojma&auth=mypwd1`, {
+    const fetchRes = await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&subject=Povrdite ostavljanje dojma&auth=mypwd1`, {
         method: 'POST',
         headers: {
             'Content-Type': 'text/html'
         },
         body: `Molimo potvrdite ostavljanje recenzije na <a href="${dev?'http://localhost:3000':'https://najdijabetolog.com'}/api/confirm?token=${data.uuid}&email=${email}">linku</a>.<br><br>Hvala,<br>NajDijabetolog.com`
     });
+    console.log(fetchRes, await fetchRes.text());
 
     return json(data);
 }
