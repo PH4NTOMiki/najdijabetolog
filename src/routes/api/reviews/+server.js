@@ -11,13 +11,13 @@ export async function POST({ request }) {
     }
 
     // Check if the email already exists in the reviews table
-    const { data: existingReview, error: existingReviewError } = await db.from('reviews').select('*').eq('email', email).eq('doctor', doctor_id).single();
+    const { data: existingReviews, error: existingReviewError } = await db.from('reviews').select('*').eq('email', email).eq('doctor', doctor_id);
     if (existingReviewError) {
         console.error('Error checking existing review:', existingReviewError);
         return json({ error: 'Greška, molimo pokušajte ponovo' }, { status: 500 });
     }
 
-    if (existingReview) {
+    if (existingReviews && existingReviews.length) {
         return json({ error: 'Već ste ostavili dojam za ovog doktora' }, { status: 400 });
     }
 
