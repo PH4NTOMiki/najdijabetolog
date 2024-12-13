@@ -1,4 +1,5 @@
 import { dev } from '$app/environment';
+import { EMAIL_KEY } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 import {db} from '$lib/db-server'; // Adjust according to your database setup
 
@@ -39,7 +40,7 @@ export async function POST({ request }) {
     }
 
     console.log('Review inserted:', data);
-    const fetchRes = await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&subject=Povrdite ostavljanje dojma&auth=mypwd1`, {
+    const fetchRes = await fetch(`https://www.nainzulinu.com/sendimejl.php?from=info@najdijabetolog.com&email=${email}&subject=Potvrdite ostavljanje dojma&auth=${EMAIL_KEY}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'text/html'
