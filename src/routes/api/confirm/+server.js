@@ -25,6 +25,19 @@ export async function GET({ url }) {
 
     // Step 2: Insert the review into `reviews`
     const { id, uuid: _, rating: ___, ...reviewData } = tempReview; // Remove sensitive fields
+    console.log(reviewData);
+
+    // Check if the email already exists in the reviews table
+    const { data: existingReviews, error: existingReviewError } = await db.from('reviews').select('*').eq('email', email).eq('doctor', reviewData.doctor);
+    if (existingReviewError) {
+        console.error('Error checking existing review:', existingReviewError);
+        return json({ success: false, message: 'Greška, molimo pokušajte ponovo' }, { status: 500 });
+    }
+
+    if (existingReviews && existingReviews.length) {
+        return json({ success: false, message: 'Već ste ostavili dojam za ovog doktora' }, { status: 400 });
+    }
+
     const { error: insertError } = await db.from('reviews').insert(reviewData);
     console.log(insertError);
 
