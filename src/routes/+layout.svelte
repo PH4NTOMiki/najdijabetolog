@@ -7,10 +7,7 @@
   import { fetchCache } from "$lib/db";
   import { LogOut } from "lucide-svelte";
   import { onMount } from "svelte";
-  /**
-   * @typedef {Object} Props
-   * @property {import('svelte').Snippet} [children]
-   */
+
   /** @type {Props} */
   let { children } = $props();
 
@@ -74,45 +71,47 @@
       <!-- Logo section -->
       <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl whitespace-nowrap">Najdijabetolog</a>
       
-      <!-- Search section -->
+      <!-- Search section with properly contained dropdown -->
       <div class="relative flex-1 min-w-0">
-        <input
-          type="text"
-          placeholder="Pronađite dijabetologa"
-          class="input input-bordered input-sm w-full"
-          bind:value={searchQuery}
-        />
-        {#if getFilteredDoctors().length > 0}
-          <div class="fixed left-0 right-0 md:absolute md:left-auto md:right-auto md:w-[calc(100%+1rem)] z-10 mt-1 bg-white shadow rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
-            {#each getFilteredDoctors() as doctor}
-              <div
-                class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
-                onclick={() => handleSelection(doctor)}
-              >
-                <div class="flex items-center space-x-2">
-                  <span class="text-yellow-500">👨‍⚕️</span>
-                  <span>{doctor.first_name} {doctor.last_name}</span>
+        <div class="w-full md:max-w-md md:absolute md:right-0 top-[-14px]">
+          <input
+            type="text"
+            placeholder="Pronađite dijabetologa"
+            class="input input-bordered input-sm w-full"
+            bind:value={searchQuery}
+          />
+          {#if getFilteredDoctors().length > 0}
+            <div class="fixed inset-x-0 md:absolute md:inset-x-auto md:w-full z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
+              {#each getFilteredDoctors() as doctor}
+                <div
+                  class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
+                  onclick={() => handleSelection(doctor)}
+                >
+                  <div class="flex items-center space-x-2">
+                    <span class="text-yellow-500">👨‍⚕️</span>
+                    <span>{doctor.first_name} {doctor.last_name}</span>
+                  </div>
+                  <div class="flex space-x-1" aria-label={`Rating: ${doctor.rating} out of 5`}>
+                    {#each renderStars(doctor.rating) as star}
+                      <svg
+                        class="w-4 h-4 {star === 'filled' ? 'text-yellow-500' : star === 'half' ? 'text-yellow-500' : 'text-gray-300'}"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="{star === 'filled' ? 'currentColor' : star === 'half' ? 'currentColor' : 'none'}"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="{star === 'half'
+                            ? 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2v15.27z'
+                            : 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'}"
+                        />
+                      </svg>
+                    {/each}
+                  </div>
                 </div>
-                <div class="flex space-x-1" aria-label={`Rating: ${doctor.rating} out of 5`}>
-                  {#each renderStars(doctor.rating) as star}
-                    <svg
-                      class="w-4 h-4 {star === 'filled' ? 'text-yellow-500' : star === 'half' ? 'text-yellow-500' : 'text-gray-300'}"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="{star === 'filled' ? 'currentColor' : star === 'half' ? 'currentColor' : 'none'}"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="{star === 'half'
-                          ? 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2v15.27z'
-                          : 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'}"
-                      />
-                    </svg>
-                  {/each}
-                </div>
-              </div>
-            {/each}
-          </div>
-        {/if}
+              {/each}
+            </div>
+          {/if}
+        </div>
       </div>
     </div>
 
