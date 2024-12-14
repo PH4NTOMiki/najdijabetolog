@@ -6,19 +6,17 @@
   import { browser } from '$app/environment';
   import { fetchCache } from "$lib/db";
   import { LogOut } from "lucide-svelte";
-	import { onMount } from "svelte";
-
+  import { onMount } from "svelte";
   /**
    * @typedef {Object} Props
    * @property {import('svelte').Snippet} [children]
    */
-
   /** @type {Props} */
   let { children } = $props();
 
   /** @type {App.Doctor[]} */
-  let doctors = $state([]); // Local variable for doctors
-  let searchQuery = $state(''); // Local search query state
+  let doctors = $state([]);
+  let searchQuery = $state('');
 
   async function handleLogout() {
     await logout();
@@ -30,7 +28,6 @@
     goto(`/doctors/${doctor.id}`);
   }
 
-  // Filter doctors based on search query
   function getFilteredDoctors() {
     if (!searchQuery) return [];
     return doctors.filter(doctor =>
@@ -38,7 +35,6 @@
     );
   }
 
-  // Render star ratings
   function renderStars(rating) {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
@@ -50,11 +46,12 @@
       ...Array(emptyStars).fill('empty')
     ];
   }
+
   onMount(()=>{
     fetch('/api/doctors')
       .then(response => response.json())
       .then(data => {
-        doctors = data; // Update local doctors variable
+        doctors = data;
       })
       .catch(error => {
         console.error('Error fetching doctors:', error);
@@ -69,65 +66,67 @@
   {/if}
 </svelte:head>
 
-<!-- Navbar -->
-<div class="navbar bg-[#ff8282] text-[black] flex-wrap">
-  <div class="navbar-start">
-    <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl">Najdijabetolog</a>
-  </div>
-
-  <!-- Search Dropdown for Doctors -->
-  <div class="navbar-end flex-grow flex flex-col items-end md:flex-row md:items-center md:space-x-4">
-    <div class="relative w-full max-w-sm md:max-w-md">
-      <input
-        type="text"
-        placeholder="Pronađite dijabetologa"
-        class="input input-bordered input-sm w-full"
-        bind:value={searchQuery}
-      />
-      {#if getFilteredDoctors().length > 0}
-        <div class="absolute z-10 w-full mt-1 bg-white shadow rounded-lg border border-gray-200 max-h-48 overflow-y-auto">
-          {#each getFilteredDoctors() as doctor}
-            <div
-              class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
-              onclick={() => handleSelection(doctor)}
-            >
-              <!-- Doctor Name -->
-              <div class="flex items-center space-x-2">
-                <span class="text-yellow-500">👨‍⚕️</span>
-                <span>{doctor.first_name} {doctor.last_name}</span>
+<!-- Navbar with improved mobile layout -->
+<div class="navbar bg-[#ff8282] text-[black] p-2">
+  <div class="w-full flex flex-wrap gap-2">
+    <!-- First row: Logo and Search -->
+    <div class="flex flex-1 items-center gap-2 min-w-0">
+      <!-- Logo section -->
+      <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl whitespace-nowrap">Najdijabetolog</a>
+      
+      <!-- Search section -->
+      <div class="relative flex-1 min-w-0">
+        <input
+          type="text"
+          placeholder="Pronađite dijabetologa"
+          class="input input-bordered input-sm w-full"
+          bind:value={searchQuery}
+        />
+        {#if getFilteredDoctors().length > 0}
+          <div class="fixed left-0 right-0 md:absolute md:left-auto md:right-auto md:w-[calc(100%+1rem)] z-10 mt-1 bg-white shadow rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
+            {#each getFilteredDoctors() as doctor}
+              <div
+                class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
+                onclick={() => handleSelection(doctor)}
+              >
+                <div class="flex items-center space-x-2">
+                  <span class="text-yellow-500">👨‍⚕️</span>
+                  <span>{doctor.first_name} {doctor.last_name}</span>
+                </div>
+                <div class="flex space-x-1" aria-label={`Rating: ${doctor.rating} out of 5`}>
+                  {#each renderStars(doctor.rating) as star}
+                    <svg
+                      class="w-4 h-4 {star === 'filled' ? 'text-yellow-500' : star === 'half' ? 'text-yellow-500' : 'text-gray-300'}"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="{star === 'filled' ? 'currentColor' : star === 'half' ? 'currentColor' : 'none'}"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="{star === 'half'
+                          ? 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2v15.27z'
+                          : 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'}"
+                      />
+                    </svg>
+                  {/each}
+                </div>
               </div>
-              
-              <!-- Doctor Star Rating -->
-              <div class="flex space-x-1" aria-label={`Rating: ${doctor.rating} out of 5`}>
-                {#each renderStars(doctor.rating) as star}
-                  <svg
-                    class="w-4 h-4 {star === 'filled' ? 'text-yellow-500' : star === 'half' ? 'text-yellow-500' : 'text-gray-300'}"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="{star === 'filled' ? 'currentColor' : star === 'half' ? 'currentColor' : 'none'}"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="{star === 'half'
-                        ? 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2v15.27z'
-                        : 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'}"
-                    />
-                  </svg>
-                {/each}
-              </div>
-            </div>
-          {/each}
-        </div>
-      {/if}
+            {/each}
+          </div>
+        {/if}
+      </div>
     </div>
 
+    <!-- User section -->
     {#if $page.url.pathname.startsWith('/upravljanje') && $user}
-      {#if $user.role === 'admin'}
-        <a href="/upravljanje/korisnici" class="btn btn-ghost text-xl">Korisnici</a>
-      {/if}
-      <h1 class="font-bold">Dobrodošli, {$user.username}!</h1>&nbsp;&nbsp;
-      <button onclick={handleLogout} class="btn btn-secondary">
-        <LogOut class="mr-2" size={18} />Odjava
-      </button>
+      <div class="flex flex-wrap items-center justify-end gap-2 ml-auto">
+        {#if $user.role === 'admin'}
+          <a href="/upravljanje/korisnici" class="btn btn-ghost text-xl">Korisnici</a>
+        {/if}
+        <h1 class="font-bold">Dobrodošli, {$user.username}!</h1>
+        <button onclick={handleLogout} class="btn btn-secondary">
+          <LogOut class="mr-2" size={18} />Odjava
+        </button>
+      </div>
     {/if}
   </div>
 </div>
