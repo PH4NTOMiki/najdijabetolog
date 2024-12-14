@@ -22,7 +22,7 @@
 
   function handleSelection(doctor) {
     searchQuery = '';
-    goto(`/doctors/${doctor.id}`);
+    goto(`/doktori/${doctor.id}`);
   }
 
   function getFilteredDoctors() {
