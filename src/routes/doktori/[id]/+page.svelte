@@ -1,7 +1,6 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
-    let { doctor, reviews } = data;
 
     // Helper function to generate an array of stars
     function renderStars(/** @type {number} */rating) {
@@ -39,7 +38,7 @@
         errorMessage = '';
 
         try {
-            if (!doctor.id || !newReview.email || !doctor.institution.id || !newReview.ratingskill || !newReview.ratingkindness || !newReview.ratingethicality || !newReview.ratinginstitution || !newReview.comment || !newReview.created_by) {
+            if (!data.doctor.id || !newReview.email || !data.doctor.institution.id || !newReview.ratingskill || !newReview.ratingkindness || !newReview.ratingethicality || !newReview.ratinginstitution || !newReview.comment || !newReview.created_by) {
                 throw new Error('Molimo popunite sva polja.');
             }
             
@@ -47,8 +46,8 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    doctor_id: doctor.id,
-                    institution_id: doctor.institution.id,
+                    doctor_id: data.doctor.id,
+                    institution_id: data.doctor.institution.id,
                     ...newReview
                 })
             });
@@ -68,7 +67,7 @@
 </script>
 
 <svelte:head>
-    <title>{doctor.first_name} {doctor.last_name} - Najbolji dijabetolozi u Vašem gradu</title>
+    <title>{data.doctor.first_name} {data.doctor.last_name} - Najbolji dijabetolozi u Vašem gradu</title>
 </svelte:head>
 
 <div class="container mx-auto px-4 py-12">
@@ -76,30 +75,30 @@
     <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8 mb-12">
         <div class="w-40 h-40 md:w-60 md:h-60 bg-blue-100 rounded-full flex-shrink-0 overflow-hidden">
             <img
-                src={`https://placehold.co/150x150@2x.png?text=${doctor.first_name}`}
-                alt="{doctor.first_name} {doctor.last_name}"
+                src={`https://placehold.co/150x150@2x.png?text=${data.doctor.first_name}`}
+                alt="{data.doctor.first_name} {data.doctor.last_name}"
                 class="w-full h-full object-cover"
             />
         </div>
 
         <div class="flex-1 space-y-6">
             <div>
-                <h1 class="text-4xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h1>
-                <h2 class="text-2xl text-gray-600"><a href="/ustanove/{doctor.institution.id}">{doctor.institution.name}</a></h2>
-                <p class="text-gray-600">{doctor.bio}</p>
+                <h1 class="text-4xl font-bold text-gray-800">{data.doctor.first_name} {data.doctor.last_name}</h1>
+                <h2 class="text-2xl text-gray-600"><a href="/ustanove/{data.doctor.institution.id}">{data.doctor.institution.name}</a></h2>
+                <p class="text-gray-600">{data.doctor.bio}</p>
             </div>
 
             <!-- Overall Rating -->
             <div>
-                <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {doctor.rating.toFixed(1)} - Ukupna ocjena</p>
+                <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {data.doctor.rating.toFixed(1)} - Ukupna ocjena</p>
 
                 <!-- Ratings by Category -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {#each [
-                        { label: 'Stručnost', rating: doctor.ratingskill },
-                        { label: 'Ljubaznost', rating: doctor.ratingkindness },
-                        { label: 'Etičnost', rating: doctor.ratingethicality },
-                        { label: 'Ustanova', rating: doctor.institution.rating },
+                        { label: 'Stručnost', rating: data.doctor.ratingskill },
+                        { label: 'Ljubaznost', rating: data.doctor.ratingkindness },
+                        { label: 'Etičnost', rating: data.doctor.ratingethicality },
+                        { label: 'Ustanova', rating: data.doctor.institution.rating },
                     ] as category}
                         <div class="text-center">
                             <p class="text-sm text-gray-600">{category.label}</p>
@@ -251,9 +250,9 @@
     <div>
         <h2 class="text-3xl font-bold text-gray-800 mb-6">Recenzije</h2>
 
-        {#if reviews.length}
+        {#if data.reviews.length}
             <div class="space-y-6">
-                {#each reviews as review}
+                {#each data.reviews as review}
                     <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition">
                         <h3 class="text-lg font-bold text-gray-800">{review.created_by}</h3>
 

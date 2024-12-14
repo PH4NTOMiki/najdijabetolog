@@ -20,11 +20,6 @@
     goto('/upravljanje/prijava');
   }
 
-  /*function handleSelection(doctor) {
-    searchQuery = '';
-    //goto(`/doktori/${doctor.id}`);
-  }*/
-
   function getFilteredDoctors() {
     if (!searchQuery) return [];
     return doctors.filter(doctor =>
@@ -32,7 +27,7 @@
     );
   }
 
-  function renderStars(rating) {
+  function renderStars(/** @type {number} */rating) {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
     const emptyStars = 5 - fullStars - halfStar;
@@ -45,6 +40,8 @@
   }
 
   onMount(()=>{
+    // @ts-ignore
+    window.goto=goto;
     fetch('/api/doctors')
       .then(response => response.json())
       .then(data => {
@@ -63,15 +60,11 @@
   {/if}
 </svelte:head>
 
-<!-- Navbar with improved mobile layout -->
 <div class="navbar bg-[#ff8282] text-[black] p-2">
   <div class="w-full flex flex-wrap gap-2">
-    <!-- First row: Logo and Search -->
     <div class="flex flex-1 items-center gap-2 min-w-0">
-      <!-- Logo section -->
       <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl whitespace-nowrap">Najdijabetolog</a>
       
-      <!-- Search section with properly contained dropdown -->
       <div class="relative flex-1 min-w-0">
         <div class="w-full md:max-w-md md:absolute md:right-0 top-[-14px]">
           <input
@@ -83,8 +76,9 @@
           {#if getFilteredDoctors().length > 0}
             <div class="fixed inset-x-0 md:absolute md:inset-x-auto md:w-full z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
               {#each getFilteredDoctors() as doctor}
+                <!-- Changed to button with onClick handler -->
                 <a href="/doktori/{doctor.id}"
-                  class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
+                  class="w-full p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
                   onclick={() => {searchQuery = ''}}
                 >
                   <div class="flex items-center space-x-2">
@@ -115,7 +109,6 @@
       </div>
     </div>
 
-    <!-- User section -->
     {#if $page.url.pathname.startsWith('/upravljanje') && $user}
       <div class="flex flex-wrap items-center justify-end gap-2 ml-auto">
         {#if $user.role === 'admin'}
