@@ -20,10 +20,10 @@
     goto('/upravljanje/prijava');
   }
 
-  function handleSelection(doctor) {
+  /*function handleSelection(doctor) {
     searchQuery = '';
-    goto(`/doktori/${doctor.id}`);
-  }
+    //goto(`/doktori/${doctor.id}`);
+  }*/
 
   function getFilteredDoctors() {
     if (!searchQuery) return [];
@@ -83,9 +83,9 @@
           {#if getFilteredDoctors().length > 0}
             <div class="fixed inset-x-0 md:absolute md:inset-x-auto md:w-full z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
               {#each getFilteredDoctors() as doctor}
-                <div
+                <a href="/doktori/{doctor.id}"
                   class="p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
-                  onclick={() => handleSelection(doctor)}
+                  onclick={() => {searchQuery = ''}}
                 >
                   <div class="flex items-center space-x-2">
                     <span class="text-yellow-500">👨‍⚕️</span>
@@ -107,7 +107,7 @@
                       </svg>
                     {/each}
                   </div>
-                </div>
+                </a>
               {/each}
             </div>
           {/if}
