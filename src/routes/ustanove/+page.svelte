@@ -2,13 +2,10 @@
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
 
-    // Destructure preloaded data
-    let { institutions } = data;
-
     let searchQuery = $state('');
 
     // Filter institutions based on search query
-    let filteredInstitutions = $derived(institutions.filter(
+    let filteredInstitutions = $derived(data.institutions.filter(
         (institution) =>
             institution.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             institution.city.name.toLowerCase().includes(searchQuery.toLowerCase())

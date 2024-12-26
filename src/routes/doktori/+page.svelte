@@ -2,14 +2,11 @@
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
 
-    // Destructure preloaded data
-    let { doctors } = data;
-
     let searchQuery = $state('');
 
     // Filter doctors based on search query
     // @ts-ignore
-    let filteredDoctors = $derived(doctors.filter(
+    let filteredDoctors = $derived(data.doctors.filter(
         (doctor) =>
             doctor.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             doctor.last_name.toLowerCase().includes(searchQuery.toLowerCase())

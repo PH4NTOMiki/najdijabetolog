@@ -1,7 +1,6 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
-    let { topDoctors, popularInstitutions/*, topCities*/ } = data;
 
     // Helper function to generate an array of stars
     function renderStars(/** @type {number} */rating) {
@@ -35,8 +34,8 @@
         </h2>
         </a>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if topDoctors.length}
-                {#each topDoctors as doctor}
+            {#if data.topDoctors.length}
+                {#each data.topDoctors as doctor}
                 <a href="/doktori/{doctor.id}">
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
@@ -127,8 +126,8 @@
         </h2>
         </a>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if popularInstitutions.length}
-                {#each popularInstitutions as institution}
+            {#if data.popularInstitutions.length}
+                {#each data.popularInstitutions as institution}
                 <a href="/ustanove/{institution.id}">
                 <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{institution.name}</h3>
@@ -152,8 +151,8 @@
             Najbolji gradovi
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#if topCities.length}
-                {#each topCities as city}
+            {#if data.topCities.length}
+                {#each data.topCities as city}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{city.name}</h3>
                         <p class="text-gray-500 mt-2">{city.institutions} ustanova</p>
