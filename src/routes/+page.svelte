@@ -19,7 +19,7 @@
 </script>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
-<h1 class="text-5xl font-extrabold text-center my-8 text-gray-800">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
+<h1 class="text-5xl font-extrabold text-center my-8 text-gray-800 dark:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
 
 <div class="container mx-auto px-4 space-y-16">
 
