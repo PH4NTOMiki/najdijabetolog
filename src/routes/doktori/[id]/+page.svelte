@@ -1,22 +1,23 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
-	let { data } = $props();
+    let { data } = $props();
 
-    // Helper function to generate an array of stars
+    // Helper function to generate an array of stars (keeping the existing function)
     function renderStars(/** @type {number} */rating) {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             if (rating >= i) {
-                stars.push('filled'); // Fully filled star
+                stars.push('filled');
             } else if (rating > i - 1 && rating < i) {
-                stars.push('half'); // Half-filled star
+                stars.push('half');
             } else {
-                stars.push('empty'); // Empty star
+                stars.push('empty');
             }
         }
         return stars;
     }
 
+    let isModalOpen = $state(false);
     let newReview = $state({
         email: '',
         ratingskill: 0,
@@ -29,9 +30,29 @@
     let successMessage = $state('');
     let errorMessage = $state('');
     
+    function openModal() {
+        isModalOpen = true;
+        // Reset form when opening modal
+        newReview = {
+            email: '',
+            ratingskill: 0,
+            ratingkindness: 0,
+            ratingethicality: 0,
+            ratinginstitution: 0,
+            comment: '',
+            created_by: ''
+        };
+        successMessage = '';
+        errorMessage = '';
+    }
+
+    function closeModal() {
+        isModalOpen = false;
+    }
+
     /**
-	 * @param {{ preventDefault: () => void; }} ev
-	 */
+     * @param {{ preventDefault: () => void; }} ev
+     */
     async function submitReview(ev) {
         ev.preventDefault();
         successMessage = '';
@@ -56,9 +77,11 @@
 
             const addedReview = await response.json();
             console.log(addedReview);
-            //reviews.unshift(addedReview); // Update the reviews list dynamically
             successMessage = 'Hvala vam! Vaša recenzija je uspješno dodana. Da bi bila vidljiva, morate potvrditi Vaš email.';
-            newReview = { email: '', ratingskill: 0, ratingkindness: 0, ratingethicality: 0, ratinginstitution: 0, comment: '', created_by: '' };
+            // Close modal after short delay to show success message
+            setTimeout(() => {
+                closeModal();
+            }, 2000);
         } catch (error) {
             // @ts-ignore
             errorMessage = error.message || 'Došlo je do greške prilikom dodavanja recenzije.';
@@ -157,96 +180,125 @@
         </div>
     </div>
 
-    <!-- Add Review Form -->
-    <div class="mt-12 p-6 border rounded-lg bg-white shadow">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Dodajte recenziju</h2>
-
-        {#if successMessage}
-            <div class="p-4 mb-6 bg-green-100 text-green-700 rounded">{successMessage}</div>
-        {/if}
-        {#if errorMessage}
-            <div class="p-4 mb-6 bg-red-100 text-red-700 rounded">{errorMessage}</div>
-        {/if}
-
-        <form onsubmit={submitReview} class="space-y-4">
-            <!-- Created By -->
-            <div>
-                <label for="created_by" class="block text-sm font-medium text-gray-700">Vaše ime</label>
-                <input
-                    id="created_by"
-                    type="text"
-                    bind:value={newReview.created_by}
-                    required
-                    class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-            </div>
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input
-                    id="email"
-                    type="email"
-                    bind:value={newReview.email}
-                    required
-                    class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                />
-            </div>
-
-            <!-- Ratings -->
-            {#each [
-                { label: 'Stručnost', key: 'ratingskill' },
-                { label: 'Ljubaznost', key: 'ratingkindness' },
-                { label: 'Etičnost', key: 'ratingethicality' },
-                { label: 'Ustanova', key: 'ratinginstitution' }
-            ] as category}
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{category.label}</label>
-                    <div class="flex items-center mt-2 space-x-1">
-                        {#each Array(5) as _, i}
-                            <svg role="button" tabindex="0"
-                                onclick={() => (newReview[category.key] = i + 1)}
-                                onkeyup={() => (newReview[category.key] = i + 1)}
-                                class="w-6 h-6 cursor-pointer {i < newReview[category.key] ? 'text-yellow-500' : 'text-gray-300'}"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="{i < newReview[category.key] ? 'currentColor' : 'none'}"
-                                viewBox="0 0 24 24"
-                                stroke="{i < newReview[category.key] ? 'none' : 'currentColor'}"
-                                stroke-width="1.5"
-                            >
-                                <path
-                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                        {/each}
-                    </div>
-                </div>
-            {/each}
-
-            <!-- Comment -->
-            <div>
-                <label for="comment" class="block text-sm font-medium text-gray-700">Komentar</label>
-                <textarea
-                    id="comment"
-                    rows="4"
-                    bind:value={newReview.comment}
-                    class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                ></textarea>
-            </div>
-
-            <!-- Submit Button -->
-            <div>
-                <button
-                    type="submit"
-                    class="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                    Pošaljite recenziju
-                </button>
-            </div>
-        </form>
+    <!-- Add Review Button -->
+    <div class="mt-12 mb-12">
+        <button
+            onclick={openModal}
+            class="py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+            Dodajte recenziju
+        </button>
     </div>
 
-    <!-- Reviews Section -->
+    <!-- Modal -->
+    {#if isModalOpen}
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Dodajte recenziju</h2>
+                        <button
+                            onclick={closeModal}
+                            class="text-gray-500 hover:text-gray-700"
+                            aria-label="Close modal"
+                        >
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {#if successMessage}
+                        <div class="p-4 mb-6 bg-green-100 text-green-700 rounded">{successMessage}</div>
+                    {/if}
+                    {#if errorMessage}
+                        <div class="p-4 mb-6 bg-red-100 text-red-700 rounded">{errorMessage}</div>
+                    {/if}
+
+                    <form onsubmit={submitReview} class="space-y-4">
+                        <!-- Created By -->
+                        <div>
+                            <label for="created_by" class="block text-sm font-medium text-gray-700">Vaše ime</label>
+                            <input
+                                id="created_by"
+                                type="text"
+                                bind:value={newReview.created_by}
+                                required
+                                class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            />
+                        </div>
+                        
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                bind:value={newReview.email}
+                                required
+                                class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            />
+                        </div>
+
+                        <!-- Ratings -->
+                        {#each [
+                            { label: 'Stručnost', key: 'ratingskill' },
+                            { label: 'Ljubaznost', key: 'ratingkindness' },
+                            { label: 'Etičnost', key: 'ratingethicality' },
+                            { label: 'Ustanova', key: 'ratinginstitution' }
+                        ] as category}
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">{category.label}</label>
+                                <div class="flex items-center mt-2 space-x-1">
+                                    {#each Array(5) as _, i}
+                                        <svg role="button" tabindex="0"
+                                            onclick={() => (newReview[category.key] = i + 1)}
+                                            onkeyup={() => (newReview[category.key] = i + 1)}
+                                            class="w-6 h-6 cursor-pointer {i < newReview[category.key] ? 'text-yellow-500' : 'text-gray-300'}"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="{i < newReview[category.key] ? 'currentColor' : 'none'}"
+                                            viewBox="0 0 24 24"
+                                            stroke="{i < newReview[category.key] ? 'none' : 'currentColor'}"
+                                            stroke-width="1.5"
+                                        >
+                                            <path
+                                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    {/each}
+                                </div>
+                            </div>
+                        {/each}
+
+                        <!-- Comment -->
+                        <div>
+                            <label for="comment" class="block text-sm font-medium text-gray-700">Komentar</label>
+                            <textarea
+                                id="comment"
+                                rows="4"
+                                bind:value={newReview.comment}
+                                class="border-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            ></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button
+                                type="submit"
+                                class="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                Pošaljite recenziju
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/if}
+
+    <!-- Reviews Section (keeping existing code) -->
     <div>
         <h2 class="text-3xl font-bold text-gray-800 mb-6">Recenzije</h2>
 
