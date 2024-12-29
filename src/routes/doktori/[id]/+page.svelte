@@ -5,10 +5,14 @@
     // Helper function to generate an array of stars (keeping the existing function)
     function renderStars(/** @type {number} */rating) {
         const stars = [];
+        const fullStars = Math.floor(rating);
+        const decimal = rating - fullStars;
+        const showHalfStar = decimal >= 0.5 && fullStars < 5;
+
         for (let i = 1; i <= 5; i++) {
-            if (rating >= i) {
+            if (i <= fullStars) {
                 stars.push('filled');
-            } else if (rating > i - 1 && rating < i) {
+            } else if (i === fullStars + 1 && showHalfStar) {
                 stars.push('half');
             } else {
                 stars.push('empty');
@@ -317,19 +321,45 @@
                             <div class="flex items-center space-x-4 text-gray-600 mb-2">
                                 <p class="w-32 font-medium">{category.label}:</p>
                                 <div class="flex" aria-label={`Rating: ${category.rating} out of 5`}>
-                                    {#each renderStars(category.rating) as star}
-                                        <svg
-                                            class="w-5 h-5 {star === 'filled' ? 'text-yellow-500' : 'text-gray-300'}"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="{star === 'filled' ? 'currentColor' : 'none'}"
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                            />
-                                        </svg>
-                                    {/each}
+                                    {#each renderStars(category.rating) as type}
+        {#if type === 'half'}
+            <svg
+                class="w-6 h-6 text-yellow-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <defs>
+                    <linearGradient id="halfStarGradient">
+                        <stop offset="50%" stop-color="currentColor"/>
+                        <stop offset="50%" stop-color="transparent"/>
+                    </linearGradient>
+                </defs>
+                <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                    fill="url(#halfStarGradient)"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        {:else}
+            <svg
+                class="w-6 h-6 {type === 'filled' ? 'text-yellow-500' : 'text-gray-300'}"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="{type === 'filled' ? 'currentColor' : 'none'}"
+                stroke="currentColor"
+                stroke-width="1.5"
+            >
+                <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        {/if}
+    {/each}
                                 </div>
                             </div>
                             
