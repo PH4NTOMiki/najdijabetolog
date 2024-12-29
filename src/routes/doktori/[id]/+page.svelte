@@ -85,7 +85,7 @@
             // Close modal after short delay to show success message
             setTimeout(() => {
                 closeModal();
-            }, 2000);
+            }, 5000);
         } catch (error) {
             // @ts-ignore
             errorMessage = error.message || 'Došlo je do greške prilikom dodavanja recenzije.';
