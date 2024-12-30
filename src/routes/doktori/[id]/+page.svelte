@@ -196,7 +196,17 @@
 
     <!-- Modal -->
     {#if isModalOpen}
-        <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            onclick={(e) => {
+                // Only close if clicking the overlay itself, not the modal content
+                if (e.target === e.currentTarget) {
+                    // Only close on larger devices (md and up)
+                    if (window.innerWidth >= 768) {
+                        closeModal();
+                    }
+                }
+            }}
+        >
             <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
