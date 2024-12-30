@@ -118,7 +118,7 @@
                 Podijelite svoja iskustva na NajDijabetolog.com i doprinesite razvoju bolje zdravstvene skrbi za sve osobe s dijabetesom!
             </p>
             <a 
-                href="/doctors" 
+                href="/doktori" 
                 class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300"
             >
                 Pregledajte dijabetologe
