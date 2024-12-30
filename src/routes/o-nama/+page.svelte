@@ -95,7 +95,7 @@
                         Za dijabetologe
                     </h2>
                     <p class="text-gray-600 dark:text-gray-300">
-                        Portal omogućuje dijabetolozima da odgovore na komentare pacijenata, zatraže dodatna pojašnjenja ili zatraže uklanjanje svog profila u slučaju neslaganja.
+                        Portal omogućuje dijabetolozima da odgovore na komentare pacijenata, zatraže dodatna pojašnjenja.
                     </p>
                 </div>
             </div>
