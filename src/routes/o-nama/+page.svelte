@@ -44,9 +44,9 @@
         <!-- Hero Section -->
         <div class="w-full max-w-3xl mx-auto text-center mb-12">
             <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                O NajDijabetolog.com
+                O nama
             </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p class="text-left text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 NajDijabetolog.com je portal namijenjen pacijentima za razmjenu iskustava o dijabetolozima i zdravstvenim ustanovama koje se bave liječenjem dijabetesa. Cilj portala je pomoći osobama s dijabetesom da pronađu stručnjake koji najbolje odgovaraju njihovim potrebama te unaprijediti kvalitetu zdravstvenih usluga vezanih uz dijabetes.
             </p>
         </div>
