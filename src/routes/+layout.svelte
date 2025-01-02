@@ -73,7 +73,7 @@
 <div class="navbar bg-[#ff8282] text-[black] p-2">
   <div class="w-full flex flex-wrap gap-2">
     <div class="flex flex-1 items-center gap-2 min-w-0">
-      <a href={$user ? `/upravljanje` : `/`} class="btn btn-ghost text-xl whitespace-nowrap">Najdijabetolog</a>
+      <a href={$user ? `/upravljanje` : `/`} class="max-w-[71%] lg:max-w-96"><img src="/logo-n.jpg" alt="Logo" /></a>
       
       <div class="relative flex-1 min-w-0">
         <div class="w-full md:max-w-md md:absolute md:right-0 top-[-14px]">
