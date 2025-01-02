@@ -5,7 +5,7 @@
   import { page } from '$app/stores';
   import { browser } from '$app/environment';
   import { fetchCache } from "$lib/db";
-  import { LogOut } from "lucide-svelte";
+  import { LogOut, Menu, X } from "lucide-svelte";
   import { onMount } from "svelte";
 
   /** @type {Props} */
@@ -14,10 +14,20 @@
   /** @type {App.Doctor[]} */
   let doctors = $state([]);
   let searchQuery = $state('');
+  let isMenuOpen = $state(false);
 
   async function handleLogout() {
     await logout();
     goto('/upravljanje/prijava');
+  }
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+  }
+
+  function handleMobileNavClick(path) {
+    isMenuOpen = false;
+    goto(path);
   }
 
   function getFilteredDoctors() {
@@ -76,7 +86,6 @@
           {#if getFilteredDoctors().length > 0}
             <div class="fixed inset-x-0 md:absolute md:inset-x-auto md:w-full z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
               {#each getFilteredDoctors() as doctor}
-                <!-- Changed to button with onClick handler -->
                 <a href="/doktori/{doctor.id}"
                   class="w-full p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
                   onclick={() => {searchQuery = ''}}
@@ -109,6 +118,21 @@
       </div>
     </div>
 
+    <!-- Hamburger menu button for mobile -->
+    <button class="btn btn-ghost lg:hidden" onclick={toggleMenu} aria-label="Menu">
+      {#if isMenuOpen}
+        <X size={24} />
+      {:else}
+        <Menu size={24} />
+      {/if}
+    </button>
+
+    <!-- Desktop navigation -->
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="/o-nama" class="btn btn-ghost">O nama</a>
+      <a href="/kontakt" class="btn btn-ghost">Kontakt</a>
+    </div>
+
     {#if $page.url.pathname.startsWith('/upravljanje') && $user}
       <div class="flex flex-wrap items-center justify-end gap-2 ml-auto">
         {#if $user.role === 'admin'}
@@ -122,5 +146,31 @@
     {/if}
   </div>
 </div>
+
+<!-- Mobile menu -->
+{#if isMenuOpen}
+  <nav class="lg:hidden fixed inset-0 z-50">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black bg-opacity-50" onclick={toggleMenu}></div>
+    
+    <!-- Menu content -->
+    <div class="relative bg-white w-64 h-full shadow-lg p-4">
+      <div class="flex flex-col gap-4">
+        <button 
+          class="btn btn-ghost w-full justify-start"
+          onclick={() => handleMobileNavClick('/o-nama')}
+        >
+          O nama
+        </button>
+        <button 
+          class="btn btn-ghost w-full justify-start"
+          onclick={() => handleMobileNavClick('/kontakt')}
+        >
+          Kontakt
+        </button>
+      </div>
+    </div>
+  </nav>
+{/if}
 
 {@render children?.()}
