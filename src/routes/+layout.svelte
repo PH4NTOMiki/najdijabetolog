@@ -154,7 +154,7 @@
     <div class="absolute inset-0 bg-black bg-opacity-50" onclick={toggleMenu}></div>
     
     <!-- Menu content -->
-    <div class="relative bg-white w-64 h-full shadow-lg p-4">
+    <div class="relative bg-white w-[18rem] h-full shadow-lg p-4">
       <div class="flex flex-col gap-4">
         <button 
           class="btn btn-ghost w-full justify-start"
