@@ -70,7 +70,7 @@
   {/if}
 </svelte:head>
 
-<div class="navbar bg-[#ff8282] text-[black] p-2">
+<div class="navbar bg-[#e8f5e9] text-[black] p-2">
   <div class="w-full flex flex-wrap gap-2">
     <div class="flex flex-1 items-center gap-2 min-w-0">
       <a href={$user ? `/upravljanje` : `/`} class="max-w-[71%] lg:max-w-96"><img src="/logo-n.png" alt="Logo" /></a>
