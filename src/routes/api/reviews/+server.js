@@ -49,5 +49,5 @@ export async function POST({ request }) {
     });
     console.log(fetchRes, await fetchRes.text());
 
-    return json(data);
+    return json(/*data*/{success: true});
 }

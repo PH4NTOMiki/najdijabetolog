@@ -6,6 +6,9 @@ export async function load({ params: {id} }) {
     /** @type {{data: App.Doctor}} */
 	// @ts-ignore
 	const { data: doctor } = await db.from('doctors').select('*, institution (*), city (*)').eq('id', id).limit(1).single();
+    if (!doctor) {
+        error(404, 'Ne možemo pronaći traženog dijabetologa.');
+    }
 
     /** @type {{data: App.Review[]}} */
 	// @ts-ignore

@@ -34,7 +34,7 @@
                 <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition duration-200">
                     <h2 class="text-xl font-bold text-gray-800">{institution.name}</h2>
                     <p class="text-gray-600">{institution.city.name}</p>
-                    <p class="text-gray-500 mt-2">{institution.doctors} doktora</p>
+                    <p class="mt-2"><span class="underline text-blue-500 hover:text-blue-700">{institution.number_of_doctors} dijabetolog{institution.number_of_doctors!=1?'a':''}</span></p>
                     <button
                         class="inline-block mt-4 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition"
                     >
