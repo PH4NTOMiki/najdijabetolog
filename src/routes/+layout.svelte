@@ -73,7 +73,7 @@
 <div class="navbar bg-[#e8f5e9] text-[black] p-2">
   <div class="w-full flex flex-wrap gap-2">
     <div class="flex flex-1 items-center gap-2 min-w-0">
-      <a href={$user ? `/upravljanje` : `/`} class="max-w-[75%] lg:max-w-96"><img src="/loggo.png" alt="Logo" /></a>
+      <a href={$user ? `/upravljanje` : `/`} class="max-w-[75%] lg:max-w-96"><img src="https://storage.mikitvba.com/2b65dda3-d847-41e1-943c-26f547b1855f.png" alt="Logo" /></a>
       
       <div class="relative flex-1 min-w-0">
         <div class="w-full md:max-w-md md:absolute md:right-0 md:top-[-14px]">
