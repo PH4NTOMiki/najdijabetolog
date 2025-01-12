@@ -31,6 +31,7 @@
     }
   }
 </script>
+<svelte:head><title>Kontakt - Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
 <div class="container mx-auto max-w-2xl p-6">
   <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Kontaktirajte nas</h1>
