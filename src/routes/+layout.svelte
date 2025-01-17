@@ -131,6 +131,7 @@
     <div class="hidden lg:flex items-center gap-4">
       <a href="/o-nama" class="btn btn-ghost">O nama</a>
       <a href="/kontakt" class="btn btn-ghost">Kontakt</a>
+      <a href="/prijavi-gresku" class="btn btn-ghost">Prijavi grešku</a>
     </div>
 
     {#if $page.url.pathname.startsWith('/upravljanje') && $user}
@@ -167,6 +168,12 @@
           onclick={() => handleMobileNavClick('/kontakt')}
         >
           Kontakt
+        </button>
+        <button 
+          class="btn btn-ghost w-full justify-start"
+          onclick={() => handleMobileNavClick('/prijavi-gresku')}
+        >
+          Prijavi grešku
         </button>
       </div>
     </div>
