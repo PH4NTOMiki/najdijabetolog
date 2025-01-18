@@ -213,6 +213,15 @@
                                 required
                             />
                         </label>
+                        <label class="block">
+                            <span class="text-gray-600">Created At:</span>
+                            <input
+                                type="text"
+                                class="mt-1 block w-full rounded-md bg-gray-100 border-gray-300 shadow-sm"
+                                value={new Date(review.created_at).toLocaleString()}
+                                readonly
+                            />
+                        </label>
                         <button
                             type="submit"
                             class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transform transition-transform duration-150 active:scale-95"
