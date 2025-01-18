@@ -41,7 +41,7 @@
 <main class="p-8 space-y-8">
     <!-- Doctor Section -->
     <section class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200">
-        <h1 class="text-2xl font-bold text-gray-700 mb-4">Edit Doctor</h1>
+        <h1 class="text-2xl font-bold text-gray-700 mb-4">Uredi dijabetologa</h1>
         {#if successMessage}
             <div class="p-2 mb-4 text-sm text-green-800 bg-green-200 border border-green-300 rounded">
                 {successMessage}
@@ -55,7 +55,7 @@
         <form on:submit|preventDefault={updateDoctor} class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <label class="block">
-                    <span class="text-gray-600">First Name:</span>
+                    <span class="text-gray-600">Ime:</span>
                     <input
                         type="text"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -64,7 +64,7 @@
                     />
                 </label>
                 <label class="block">
-                    <span class="text-gray-600">Last Name:</span>
+                    <span class="text-gray-600">Prezime:</span>
                     <input
                         type="text"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -75,7 +75,7 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <label class="block">
-                    <span class="text-gray-600">Skill Rating:</span>
+                    <span class="text-gray-600">Stručnost:</span>
                     <input
                         type="number"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -86,7 +86,7 @@
                     />
                 </label>
                 <label class="block">
-                    <span class="text-gray-600">Kindness Rating:</span>
+                    <span class="text-gray-600">Ljubaznost Ocjena:</span>
                     <input
                         type="number"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -97,7 +97,7 @@
                     />
                 </label>
                 <label class="block">
-                    <span class="text-gray-600">Ethicality Rating:</span>
+                    <span class="text-gray-600">Etičnost Ocjena:</span>
                     <input
                         type="number"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -112,19 +112,19 @@
                 type="submit"
                 class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transform transition-transform duration-150 active:scale-95"
             >
-                Save Doctor
+                Spremi
             </button>
         </form>
     </section>
 
     <!-- Reviews Section -->
     <section class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200">
-        <h2 class="text-2xl font-bold text-gray-700 mb-4">Edit Reviews</h2>
+        <h2 class="text-2xl font-bold text-gray-700 mb-4">Uredi ocjene</h2>
         <div class="space-y-6">
             {#each updatedReviews as review, index}
                 <div class="p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50">
                     <h3 class="text-lg font-medium text-gray-700">
-                        Review #{index + 1}
+                        Ocjena #{index + 1}
                     </h3>
                     <form
                         on:submit|preventDefault={() =>
@@ -141,7 +141,7 @@
                         class="space-y-4 mt-4"
                     >
                         <label class="block">
-                            <span class="text-gray-600">Content:</span>
+                            <span class="text-gray-600">Komentar:</span>
                             <textarea
                                 rows="3"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -150,7 +150,7 @@
                             ></textarea>
                         </label>
                         <label class="block">
-                            <span class="text-gray-600">Institution Rating:</span>
+                            <span class="text-gray-600">Institucija Ocjena:</span>
                             <input
                                 type="number"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -162,7 +162,7 @@
                         </label>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <label class="block">
-                                <span class="text-gray-600">Skill Rating:</span>
+                                <span class="text-gray-600">Stručnost Ocjena:</span>
                                 <input
                                     type="number"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -173,7 +173,7 @@
                                 />
                             </label>
                             <label class="block">
-                                <span class="text-gray-600">Kindness Rating:</span>
+                                <span class="text-gray-600">Ljubaznost Ocjena:</span>
                                 <input
                                     type="number"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -184,7 +184,7 @@
                                 />
                             </label>
                             <label class="block">
-                                <span class="text-gray-600">Ethicality Rating:</span>
+                                <span class="text-gray-600">Etičnost Ocjena:</span>
                                 <input
                                     type="number"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -196,7 +196,7 @@
                             </label>
                         </div>
                         <label class="block">
-                            <span class="text-gray-600">Created By:</span>
+                            <span class="text-gray-600">Ocjenu ostavio:</span>
                             <input
                                 type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -214,7 +214,7 @@
                             />
                         </label>
                         <label class="block">
-                            <span class="text-gray-600">Created At:</span>
+                            <span class="text-gray-600">Ostavljena:</span>
                             <input
                                 type="text"
                                 class="mt-1 block w-full rounded-md bg-gray-100 border-gray-300 shadow-sm"
@@ -226,7 +226,7 @@
                             type="submit"
                             class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transform transition-transform duration-150 active:scale-95"
                         >
-                            Save Review
+                            Spremi
                         </button>
                     </form>
                 </div>
