@@ -81,8 +81,8 @@
         class="input input-bordered w-full mt-1 px-3 py-2 rounded-lg shadow-sm border border-gray-300 focus:ring focus:ring-blue-300"
       >
         <option value="" disabled selected>Odaberite tip problema</option>
-        <option value="Promena institucije">Promjena institucije</option>
-        <option value="Netačni kontakt podaci">Netočni kontakt podaci</option>
+        <option value="Promjena institucije">Promjena institucije</option>
+        <option value="Netočni kontakt podaci">Netočni kontakt podaci</option>
         <option value="Pogrešan opis">Pogrešan opis</option>
         <option value="Drugo">Drugo</option>
       </select>

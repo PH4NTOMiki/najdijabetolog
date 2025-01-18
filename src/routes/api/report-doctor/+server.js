@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/db'; // Adjust to your actual database connection path
+import { db } from '$lib/db-server'; // Adjust to your actual database connection path
 
 export async function POST({ request }) {
   try {
@@ -14,14 +14,13 @@ export async function POST({ request }) {
     }
 
     // Insert the report into the database
-    /*await db('reports').insert({
+    await db.from('reports').insert({
       doctor_name: doctorName,
       issue_type: issueType,
       description,
       reporter_email: reporterEmail || null, // Optional field
-      created_at: new Date() // Add timestamp
-    });*/
-    // For now, just log the report to the console
+      //created_at: new Date() // Add timestamp
+    });
     console.log('Report submitted:', { doctorName, issueType, description, reporterEmail });
 
     return json({ message: 'Report submitted successfully.' });
