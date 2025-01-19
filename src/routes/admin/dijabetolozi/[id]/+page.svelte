@@ -8,34 +8,43 @@
     let errorMessage = '';
 
     async function updateDoctor() {
-        const { error } = await supabase
-            .from('doctors')
-            .update(updatedDoctor)
-            .eq('id', data.doctor.id);
+    try {
+        const response = await fetch(`/api/doctors/${data.doctor.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedDoctor),
+        });
+        const result = await response.json();
 
-        if (error) {
-            errorMessage = 'Failed to update doctor details: ' + error.message;
-            successMessage = '';
-        } else {
-            successMessage = 'Doctor details updated successfully!';
-            errorMessage = '';
-        }
+        if (!response.ok) throw new Error(result.error || 'Unknown error');
+
+        successMessage = result.message;
+        errorMessage = '';
+    } catch (err) {
+        errorMessage = `Failed to update doctor details: ${err.message}`;
+        successMessage = '';
     }
+}
 
-    async function updateReview(reviewId, updatedData) {
-        const { error } = await supabase
-            .from('reviews')
-            .update(updatedData)
-            .eq('id', reviewId);
+async function updateReview(reviewId, updatedData) {
+    try {
+        const response = await fetch(`/api/reviews/${reviewId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedData),
+        });
+        const result = await response.json();
 
-        if (error) {
-            errorMessage = 'Failed to update review: ' + error.message;
-            successMessage = '';
-        } else {
-            successMessage = 'Review updated successfully!';
-            errorMessage = '';
-        }
+        if (!response.ok) throw new Error(result.error || 'Unknown error');
+
+        successMessage = result.message;
+        errorMessage = '';
+    } catch (err) {
+        errorMessage = `Failed to update review: ${err.message}`;
+        successMessage = '';
     }
+}
+
 </script>
 
 <main class="p-8 space-y-8">
