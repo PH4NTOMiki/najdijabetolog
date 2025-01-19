@@ -4,8 +4,8 @@
 
     let updatedDoctor = $state({ ...data.doctor });
     let updatedReviews = $state([...data.reviews]);
-    let successMessage = '';
-    let errorMessage = '';
+    let successMessage = $state('');
+    let errorMessage = $state('');
 
     async function updateDoctor() {
     try {
