@@ -17,6 +17,7 @@
         return stars;
     }
 </script>
+<style>@media (max-width: 767px){.hide-last-a-child a:last-child {display: none;}}</style>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
 <h1 class="text-5xl font-extrabold text-center my-8 text-gray-800 dark:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
@@ -33,7 +34,7 @@
             Najbolji dijabetolozi
         </h2>
         </a>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="hide-last-a-child grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#if data.topDoctors.length}
                 {#each data.topDoctors as doctor}
                 <a href="/doktori/{doctor.id}">
@@ -125,7 +126,7 @@
             Najpopularnije ustanove
         </h2>
         </a>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="hide-last-a-child grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#if data.popularInstitutions.length}
                 {#each data.popularInstitutions as institution}
                 <a href="/ustanove/{institution.id}">
@@ -150,7 +151,7 @@
             </svg>
             Najbolji gradovi
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="hide-last-a-child grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#if data.topCities.length}
                 {#each data.topCities as city}
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
