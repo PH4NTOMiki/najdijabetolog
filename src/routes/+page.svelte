@@ -122,13 +122,15 @@ Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njiho
                     </div>
                 </a>
                 {/each}
-                <div class="text-center mt-8">
-                    <a href="/dijabetolozi" class="btn-more">Više</a>
-                </div>
             {:else}
                 <p class="text-gray-500">Ne možemo pronaći najbolje dijabetologe u Vašem gradu.</p>
             {/if}
         </div>
+        {#if data.topDoctors.length}
+            <div class="text-center mt-8">
+                <a href="/dijabetolozi" class="btn-more">Više</a>
+            </div>
+        {/if}
     </section>
 
     <!-- Popular Hospitals Section -->
@@ -152,13 +154,15 @@ Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njiho
                     </div>
                 </a>
                 {/each}
-                <div class="text-center mt-8">
-                    <a href="/ustanove" class="btn-more green">Više</a>
-                </div>
             {:else}
                 <p class="text-gray-500">Ne možemo pronaći najpopularnije ustanove u Vašem gradu.</p>
             {/if}
         </div>
+        {#if data.popularInstitutions.length}
+            <div class="text-center mt-8">
+                <a href="/ustanove" class="btn-more green">Više</a>
+            </div>
+        {/if}
     </section>
 
     <!-- Top Cities Section -->
