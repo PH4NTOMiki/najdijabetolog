@@ -86,7 +86,7 @@
           {#if getFilteredDoctors().length > 0}
             <div class="fixed inset-x-0 md:absolute md:inset-x-auto md:w-full z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2 md:mx-0">
               {#each getFilteredDoctors() as doctor}
-                <a href="/doktori/{doctor.id}"
+                <a href="/dijabetolozi/{doctor.id}"
                   class="w-full p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
                   onclick={() => {searchQuery = ''}}
                 >

@@ -58,5 +58,5 @@ export async function GET({ url }) {
         });
     }
 
-    redirect(301, `/doktori/${tempReview.doctor}`);
+    redirect(301, `/dijabetolozi/${tempReview.doctor}`);
 }

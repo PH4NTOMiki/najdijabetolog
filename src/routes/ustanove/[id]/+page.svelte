@@ -33,7 +33,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {#if data.doctors.length}
             {#each data.doctors as doctor}
-            <a href="/doktori/{doctor.id}">
+            <a href="/dijabetolozi/{doctor.id}">
                 <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                     <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
                     <p class="text-gray-600 italic">{doctor.institution.name}</p>

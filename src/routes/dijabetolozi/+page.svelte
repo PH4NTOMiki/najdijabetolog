@@ -32,7 +32,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {#if filteredDoctors.length}
             {#each filteredDoctors as doctor}
-            <a href={`/doktori/${doctor.id}`}>
+            <a href={`/dijabetolozi/${doctor.id}`}>
             <div class="p-6 border rounded-lg bg-white shadow hover:shadow-lg transition duration-200">
                     <h2 class="text-xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h2>
                     <p class="text-gray-500">{doctor.institution.name}</p>

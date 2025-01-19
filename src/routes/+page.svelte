@@ -38,7 +38,7 @@
 
     <!-- Top Doctors Section -->
     <section class="bg-blue-50 rounded-lg py-8 px-6 shadow-lg">
-        <a href="/doktori">
+        <a href="/dijabetolozi">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 16c4.418 0 8 3.582 8 8H4c0-4.418 3.582-8 8-8z" />
@@ -49,7 +49,7 @@
         <div class="hide-last-a-child grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {#if data.topDoctors.length}
                 {#each data.topDoctors as doctor}
-                <a href="/doktori/{doctor.id}">
+                <a href="/dijabetolozi/{doctor.id}">
                     <div class="p-6 border rounded-lg bg-white hover:shadow-2xl transform hover:-translate-y-2 transition duration-200">
                         <h3 class="text-2xl font-bold text-gray-800">{doctor.first_name} {doctor.last_name}</h3>
                         <p class="text-gray-600 italic">{doctor.institution.name}</p>
@@ -123,7 +123,7 @@
                 </a>
                 {/each}
                 <div class="text-center mt-8">
-                    <a href="/doktori" class="btn-more">Više</a>
+                    <a href="/dijabetolozi" class="btn-more">Više</a>
                 </div>
             {:else}
                 <p class="text-gray-500">Ne možemo pronaći najbolje dijabetologe u Vašem gradu.</p>
