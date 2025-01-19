@@ -20,7 +20,13 @@
 <style>@media (max-width: 767px){.hide-last-a-child > a:last-child {display: none;}}</style>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
-<h1 class="text-5xl font-extrabold text-center my-8 text-gray-800 dark:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
+<h4 class="text-[1rem] md:text-lg md:text-justify text-center my-6 px-4 md:px-6 py-2 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-sm leading-snug md:leading-relaxed">
+    Misija portala <strong>najDijabetolog</strong> je unaprjeđenje dijabetološke skrbi za osobe s dijabetesom.<br>
+    Pružamo korisne informacije o dijabetolozima u Hrvatskoj kako bi osobe s dijabetesom lakše pronašle potrebnu pomoć.<br>
+    Dijabetolozima omogućujemo povratne informacije o njihovom radu i ukazujemo na prostor za poboljšanje.
+</h4>
+
+<h1 class="text-3xl font-extrabold text-center my-8 text-gray-800 dark:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
 
 <div class="container mx-auto px-4 space-y-16">
 
