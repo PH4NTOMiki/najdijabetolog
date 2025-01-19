@@ -17,7 +17,7 @@
         return stars;
     }
 </script>
-<style>@media (max-width: 767px){.hide-last-a-child a:last-child {display: none;}}</style>
+<style>@media (max-width: 767px){.hide-last-a-child > a:last-child {display: none;}}</style>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
 <h1 class="text-5xl font-extrabold text-center my-8 text-gray-800 dark:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
