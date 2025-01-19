@@ -17,7 +17,7 @@
         return stars;
     }
 </script>
-<style>@media (max-width: 767px){.hide-last-a-child > a:last-child {display: none;}}
+<style>@media (max-width: 767px){.hide-last-a-child > a:last-of-type {display: none;}}
  .btn-more {
         @apply bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-200;
     }
