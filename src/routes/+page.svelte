@@ -17,7 +17,13 @@
         return stars;
     }
 </script>
-<style>@media (max-width: 767px){.hide-last-a-child > a:last-child {display: none;}}</style>
+<style>@media (max-width: 767px){.hide-last-a-child > a:last-child {display: none;}}
+ .btn-more {
+        @apply bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-200;
+    }
+    .btn-more.green {
+        @apply bg-green-500 hover:bg-green-600;
+    }</style>
 <svelte:head><title>Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
 <h4 class="text-[1rem] md:text-lg md:text-justify text-center my-6 px-4 md:px-6 py-2 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-sm leading-snug md:leading-relaxed">
@@ -116,6 +122,9 @@
                     </div>
                 </a>
                 {/each}
+                <div class="text-center mt-8">
+                    <a href="/doktori" class="btn-more">Više</a>
+                </div>
             {:else}
                 <p class="text-gray-500">Ne možemo pronaći najbolje dijabetologe u Vašem gradu.</p>
             {/if}
@@ -143,6 +152,9 @@
                     </div>
                 </a>
                 {/each}
+                <div class="text-center mt-8">
+                    <a href="/ustanove" class="btn-more green">Više</a>
+                </div>
             {:else}
                 <p class="text-gray-500">Ne možemo pronaći najpopularnije ustanove u Vašem gradu.</p>
             {/if}
