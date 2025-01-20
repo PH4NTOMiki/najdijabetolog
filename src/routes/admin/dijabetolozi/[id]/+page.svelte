@@ -45,6 +45,56 @@ async function updateReview(reviewId, updatedData) {
     }
 }
 
+let loadingDoctor = $state(false);
+let loadingReviews = $state({});
+
+async function deleteDoctor() {
+    if (!confirm('Are you sure you want to delete this doctor? This action cannot be undone.')) return;
+
+    loadingDoctor = true;
+    try {
+        const response = await fetch(`/api/doctors/${data.doctor.id}`, {
+            method: 'DELETE',
+        });
+        const result = await response.json();
+
+        if (!response.ok) throw new Error(result.error || 'Unknown error');
+
+        successMessage = 'Doctor deleted successfully.';
+        errorMessage = '';
+        // Optionally, navigate away or reset state
+    } catch (err) {
+        errorMessage = `Failed to delete doctor: ${err.message}`;
+        successMessage = '';
+    } finally {
+        loadingDoctor = false;
+    }
+}
+
+async function deleteReview(reviewId) {
+    if (!confirm('Are you sure you want to delete this review? This action cannot be undone.')) return;
+
+    loadingReviews = { ...loadingReviews, [reviewId]: true };
+    try {
+        const response = await fetch(`/api/reviews/${reviewId}`, {
+            method: 'DELETE',
+        });
+        const result = await response.json();
+
+        if (!response.ok) throw new Error(result.error || 'Unknown error');
+
+        successMessage = `Review deleted successfully.`;
+        errorMessage = '';
+        updatedReviews = updatedReviews.filter((review) => review.id !== reviewId);
+    } catch (err) {
+        errorMessage = `Failed to delete review: ${err.message}`;
+        successMessage = '';
+    } finally {
+        loadingReviews = { ...loadingReviews, [reviewId]: false };
+    }
+}
+
+
 </script>
 
 <main class="p-8 space-y-8">
@@ -124,6 +174,23 @@ async function updateReview(reviewId, updatedData) {
                 Spremi
             </button>
         </form>
+        <br>
+        <button
+            type="button"
+            class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transform transition-transform duration-150 active:scale-95 flex items-center justify-center"
+            on:click={deleteDoctor}
+            disabled={loadingDoctor}
+        >
+            {#if loadingDoctor}
+                <svg class="animate-spin h-5 w-5 text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C3.164 0 0 3.164 0 12h4z"></path>
+                </svg>
+                Obriši...
+            {:else}
+                Obriši doktora
+            {/if}
+        </button>
     </section>
 
     <!-- Reviews Section -->
@@ -238,6 +305,23 @@ async function updateReview(reviewId, updatedData) {
                             Spremi
                         </button>
                     </form>
+                    <br>
+                    <button
+                        type="button"
+                        class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transform transition-transform duration-150 active:scale-95 flex items-center justify-center"
+                        on:click={() => deleteReview(review.id)}
+                        disabled={loadingReviews[review.id]}
+                    >
+                        {#if loadingReviews[review.id]}
+                            <svg class="animate-spin h-5 w-5 text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C3.164 0 0 3.164 0 12h4z"></path>
+                            </svg>
+                            Obriši...
+                        {:else}
+                            Obriši ocjenu
+                        {/if}
+                    </button>
                 </div>
             {/each}
         </div>
