@@ -84,7 +84,7 @@ async function updateReview(reviewId, updatedData) {
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <label class="block">
-                    <span class="text-gray-600">Stručnost:</span>
+                    <span class="text-gray-600">Stručnost Ocjena:</span>
                     <input
                         type="number"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
