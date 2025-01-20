@@ -110,9 +110,9 @@
 
         <div class="flex-1 space-y-6">
             <div>
-                <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-300">{data.doctor.first_name} {data.doctor.last_name}</h1>
-                <h2 class="text-2xl text-gray-600 dark:text-gray-200"><a href="/ustanove/{data.doctor.institution.id}">{data.doctor.institution.name}</a></h2>
-                <p class="text-gray-600 dark:text-gray-200">{data.doctor.bio}</p>
+                <h1 class="text-4xl font-bold text-gray-800 dark-disabled:text-gray-300">{data.doctor.first_name} {data.doctor.last_name}</h1>
+                <h2 class="text-2xl text-gray-600 dark-disabled:text-gray-200"><a href="/ustanove/{data.doctor.institution.id}">{data.doctor.institution.name}</a></h2>
+                <p class="text-gray-600 dark-disabled:text-gray-200">{data.doctor.bio}</p>
             </div>
 
             <!-- Overall Rating -->
@@ -128,7 +128,7 @@
                         { label: 'Ustanova', rating: data.doctor.institution.rating },
                     ] as category}
                         <div class="text-center">
-                            <p class="text-sm text-gray-600 dark:text-gray-200">{category.label}</p>
+                            <p class="text-sm text-gray-600 dark-disabled:text-gray-200">{category.label}</p>
                             <div class="flex justify-center space-x-1 mt-1" aria-label={`Rating: ${category.rating} out of 5`}>
                                 {#each renderStars(category.rating) as type}
                                     {#if type === 'half'}
@@ -176,7 +176,7 @@
                                     {/if}
                                 {/each}
                             </div>
-                            <p class="text-sm text-gray-600 dark:text-gray-200">{category.rating.toFixed(1)}</p>
+                            <p class="text-sm text-gray-600 dark-disabled:text-gray-200">{category.rating.toFixed(1)}</p>
                         </div>
                     {/each}
                 </div>
