@@ -81,13 +81,13 @@ async function deleteReview(reviewId) {
         });
         const result = await response.json();
 
-        if (!response.ok) throw new Error(result.error || 'Unknown error');
+        if (!response.ok) throw new Error(result.error || 'Nepoznata greška');
 
-        successMessage = `Review deleted successfully.`;
+        successMessage = `Recenzija uspješno izbrisana.`;
         errorMessage = '';
         updatedReviews = updatedReviews.filter((review) => review.id !== reviewId);
     } catch (err) {
-        errorMessage = `Failed to delete review: ${err.message}`;
+        errorMessage = `Greška pri brisanju recenzije: ${err.message}`;
         successMessage = '';
     } finally {
         loadingReviews = { ...loadingReviews, [reviewId]: false };
@@ -96,6 +96,9 @@ async function deleteReview(reviewId) {
 
 
 </script>
+<svelte:head>
+    <title>Uredi dijabetologa - {updatedDoctor.first_name} {updatedDoctor.last_name}</title>
+</svelte:head>
 
 <main class="p-8 space-y-8">
     <!-- Doctor Section -->
