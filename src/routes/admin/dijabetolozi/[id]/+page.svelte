@@ -35,12 +35,12 @@ async function updateReview(reviewId, updatedData) {
         });
         const result = await response.json();
 
-        if (!response.ok) throw new Error(result.error || 'Unknown error');
+        if (!response.ok) throw new Error(result.error || 'Nepoznata greška');
 
         successMessage = result.message;
         errorMessage = '';
     } catch (err) {
-        errorMessage = `Failed to update review: ${err.message}`;
+        errorMessage = `Greška prilikom ažuriranja recenzije: ${err.message}`;
         successMessage = '';
     }
 }
@@ -49,7 +49,7 @@ let loadingDoctor = $state(false);
 let loadingReviews = $state({});
 
 async function deleteDoctor() {
-    if (!confirm('Are you sure you want to delete this doctor? This action cannot be undone.')) return;
+    if (!confirm('Jeste li sigurni da želite izbrisati ovog dijabetologa? Ova radnja ne može biti poništena.')) return;
 
     loadingDoctor = true;
     try {
@@ -58,13 +58,13 @@ async function deleteDoctor() {
         });
         const result = await response.json();
 
-        if (!response.ok) throw new Error(result.error || 'Unknown error');
+        if (!response.ok) throw new Error(result.error || 'Nepoznata greška');
 
-        successMessage = 'Doctor deleted successfully.';
+        successMessage = 'Dijabetolog uspješno izbrisan.';
         errorMessage = '';
         // Optionally, navigate away or reset state
     } catch (err) {
-        errorMessage = `Failed to delete doctor: ${err.message}`;
+        errorMessage = `Greška pri brisanju dijabetologa: ${err.message}`;
         successMessage = '';
     } finally {
         loadingDoctor = false;
@@ -72,7 +72,7 @@ async function deleteDoctor() {
 }
 
 async function deleteReview(reviewId) {
-    if (!confirm('Are you sure you want to delete this review? This action cannot be undone.')) return;
+    if (!confirm('Jeste li sigurni da želite izbrisati ovu recenziju? Ova radnja ne može biti poništena.')) return;
 
     loadingReviews = { ...loadingReviews, [reviewId]: true };
     try {

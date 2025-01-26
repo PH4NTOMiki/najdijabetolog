@@ -8,11 +8,11 @@ export async function PATCH({ params, request }) {
     try {
         const { error } = await db.from('reviews').update(data).eq('id', id);
         if (error) {
-            return json({ error: `Failed to update review: ${error.message}` }, { status: 500 });
+            return json({ error: `Greška prilikom ažuriranja recenzije: ${error.message}` }, { status: 500 });
         }
-        return json({ message: 'Review updated successfully!' });
+        return json({ message: 'Recenzija uspješno ažurirana!' });
     } catch (error) {
-        return json({ error: 'An unexpected error occurred.' }, { status: 500 });
+        return json({ error: 'Neočekivana greška.' }, { status: 500 });
     }
 }
 
@@ -21,10 +21,10 @@ export async function DELETE({ params }) {
     try {
         const { error } = await db.from('reviews').delete().eq('id', id);
         if (error) {
-            return json({ error: `Failed to delete review: ${error.message}` }, { status: 500 });
+            return json({ error: `Greška prilikom brisanja recenzije: ${error.message}` }, { status: 500 });
         }
-        return json({ message: 'Review deleted successfully!' });
+        return json({ message: 'Recenzija uspješno izbrisana!' });
     } catch (error) {
-        return json({ error: 'An unexpected error occurred.' }, { status: 500 });
+        return json({ error: 'Neočekivana greška.' }, { status: 500 });
     }
 }
