@@ -35,11 +35,30 @@
     goto(path);
   }
 
+  function prepareInput(/** @type {string} */str){
+    return str.toLowerCase().replaceAll('ž','z').replaceAll('š','s').replaceAll('č','c').replaceAll('ć','c');
+  }
+
   function getFilteredDoctors() {
     if (!searchQuery) return [];
-    return doctors.filter(doctor =>
-      `${doctor.first_name} ${doctor.last_name}`.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+
+    const normalizedQuery = prepareInput(searchQuery.trim());
+    const queryParts = normalizedQuery.split(/\s+/);
+
+    return doctors.filter(doctor => {
+      const fullName1 = prepareInput(`${doctor.first_name} ${doctor.last_name}`);
+      const fullName2 = prepareInput(`${doctor.last_name} ${doctor.first_name}`);
+
+      // Check if the query matches any name combination or a part of it
+      return (
+        fullName1.includes(normalizedQuery) ||
+        fullName2.includes(normalizedQuery) ||
+        queryParts.every(part => 
+          prepareInput(doctor.first_name).includes(part) ||
+          prepareInput(doctor.last_name).includes(part)
+        )
+      );
+    });
   }
 
   function renderStars(/** @type {number} */rating) {
