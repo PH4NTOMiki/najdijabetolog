@@ -40,7 +40,7 @@
   }
 
   let searchResults = $derived.by(() => {
-    if (!searchQuery) return [];
+    if (!searchQuery.trim()) return [];
 
     const normalizedQuery = prepareInput(searchQuery.trim());
     const queryParts = normalizedQuery.split(/\s+/);

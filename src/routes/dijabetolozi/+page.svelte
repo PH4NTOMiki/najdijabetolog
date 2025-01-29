@@ -9,7 +9,7 @@
     }
 
     let filteredDoctors = $derived.by(() => {
-        if (!searchQuery) return data.doctors.slice();
+        if (!searchQuery.trim()) return data.doctors.slice();
 
         const normalizedQuery = prepareInput(searchQuery.trim());
         const queryParts = normalizedQuery.split(/\s+/);
