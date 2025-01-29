@@ -4,13 +4,31 @@
 
     let searchQuery = $state('');
 
-    // Filter doctors based on search query
-    // @ts-ignore
-    let filteredDoctors = $derived(data.doctors.filter(
-        (doctor) =>
-            doctor.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            doctor.last_name.toLowerCase().includes(searchQuery.toLowerCase())
-    ));
+    function prepareInput(/** @type {string} */str){
+        return str.toLowerCase().replaceAll('ž','z').replaceAll('š','s').replaceAll('č','c').replaceAll('ć','c');
+    }
+
+    let filteredDoctors = $derived.by(() => {
+        if (!searchQuery) return data.doctors.slice();
+
+        const normalizedQuery = prepareInput(searchQuery.trim());
+        const queryParts = normalizedQuery.split(/\s+/);
+
+        return data.doctors.filter(doctor => {
+            const fullName1 = prepareInput(`${doctor.first_name} ${doctor.last_name}`);
+            const fullName2 = prepareInput(`${doctor.last_name} ${doctor.first_name}`);
+
+            // Check if the query matches any name combination or a part of it
+            return (
+                fullName1.includes(normalizedQuery) ||
+                fullName2.includes(normalizedQuery) ||
+                queryParts.every(part => 
+                    prepareInput(doctor.first_name).includes(part) ||
+                    prepareInput(doctor.last_name).includes(part)
+                )
+            );
+        });
+    });
 </script>
 <svelte:head><title>Dijabetolozi - Najbolji dijabetolozi u Vašem gradu</title></svelte:head>
 
