@@ -39,7 +39,7 @@
     return str.toLowerCase().replaceAll('ž','z').replaceAll('š','s').replaceAll('č','c').replaceAll('ć','c');
   }
 
-  function getFilteredDoctors() {
+  let searchResults = $derived.by(() => {
     if (!searchQuery) return [];
 
     const normalizedQuery = prepareInput(searchQuery.trim());
@@ -59,7 +59,7 @@
         )
       );
     });
-  }
+  });
 
   function renderStars(/** @type {number} */rating) {
     const fullStars = Math.floor(rating);
@@ -133,9 +133,9 @@
             class="input input-bordered input-sm w-full"
             bind:value={searchQuery}
           />
-          {#if getFilteredDoctors().length > 0}
+          {#if searchResults.length > 0}
             <div class="absolute z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto w-full max-w-md">
-              {#each getFilteredDoctors() as doctor}
+              {#each searchResults as doctor}
                 <a href="/dijabetolozi/{doctor.id}"
                   class="w-full p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
                   onclick={() => { searchQuery = '' }}
@@ -191,9 +191,9 @@
       class="input input-bordered input-sm w-full"
       bind:value={searchQuery}
     />
-    {#if getFilteredDoctors().length > 0}
+    {#if searchResults.length > 0}
       <div class="fixed inset-x-0 z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 max-h-48 overflow-y-auto mx-2">
-        {#each getFilteredDoctors() as doctor}
+        {#each searchResults as doctor}
           <a href="/dijabetolozi/{doctor.id}"
             class="w-full p-2 cursor-pointer hover:bg-gray-100 flex items-center justify-between space-x-4"
             onclick={() => { searchQuery = '' }}
