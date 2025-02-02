@@ -4,7 +4,8 @@ import {db} from '$lib/db-server';
 export const POST = async ({ request }) => {
   // Get the form data from the request
   const formData = await request.formData();
-  const file = formData.get('file');
+  const file = formData.get('image');
+  const doctorId = formData.get('doctorId');
 
   if (!file || !(file instanceof File)) {
     return json({ message: 'No file uploaded' }, { status: 400 });
@@ -16,7 +17,8 @@ export const POST = async ({ request }) => {
   }
 
   // Generate a unique file name (using a timestamp here)
-  const fileName = `${Date.now()}_${file.name}`;
+  let fileName = `${Date.now()}`;if(!file.name.includes('.')){fileName += '.jpg';}else{fileName += file.name.substring(file.name.lastIndexOf('.'));}
+  console.log('fileName', fileName);
 
   // Convert the File into a Node Buffer.
   // (This is required because the Supabase client running on the server expects a Buffer or Blob.)
@@ -35,5 +37,9 @@ export const POST = async ({ request }) => {
   }
 
   console.log('data', data);
+  // Update the doctor's profile picture in the database
+  const imgUrl = db.storage.from('profile-pics').getPublicUrl(data.path).data.publicUrl;
+  console.log('imgUrl', imgUrl);
+  console.log(await db.from('doctors').update({ profile_picture: imgUrl }).eq('id', doctorId));
   return json({ message: 'File uploaded successfully!', data });
 };

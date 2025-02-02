@@ -45,6 +45,7 @@ declare global {
 			ratingkindness: number;
 			ratingethicality: number;
 			bio: string;
+			profile_picture: string;
 		}
 		interface Review {
 			id: number;

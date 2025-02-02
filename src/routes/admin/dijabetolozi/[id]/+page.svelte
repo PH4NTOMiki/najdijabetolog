@@ -6,8 +6,54 @@
     let updatedReviews = $state([...data.reviews]);
     let successMessage = $state('');
     let errorMessage = $state('');
+    let imageFile = $state(null);
+    let imagePreview = $state(null);
+    let uploadingImage = $state(false);
 
-    async function updateDoctor() {
+    function handleImageChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+            imageFile = file;
+            // Create preview URL
+            // @ts-ignore
+            imagePreview = URL.createObjectURL(file);
+        }
+    }
+
+    async function uploadProfileImage() {
+        if (!imageFile) return;
+
+        uploadingImage = true;
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        // @ts-ignore
+        formData.append('doctorId', data.doctor.id);
+
+        try {
+            const response = await fetch('/api/change-doctor-profile', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+
+            if (!response.ok) throw new Error(result.error || 'Unknown error');
+
+            successMessage = 'Profile image successfully updated';
+            errorMessage = '';
+            // Update the doctor's image URL if returned in the response
+            if (result.imageUrl) {
+                updatedDoctor.profile_image = result.imageUrl;
+            }
+        } catch (err) {
+            errorMessage = `Failed to update profile image: ${err.message}`;
+            successMessage = '';
+        } finally {
+            uploadingImage = false;
+        }
+    }
+
+    // @ts-ignore
+    async function updateDoctor(ev) {ev.preventDefault();
     try {
         const response = await fetch(`/api/doctors/${data.doctor.id}`, {
             method: 'PATCH',
@@ -114,7 +160,58 @@ async function deleteReview(reviewId) {
                 {errorMessage}
             </div>
         {/if}
-        <form on:submit|preventDefault={updateDoctor} class="space-y-4">
+
+            <!-- Profile Image Section -->
+        <div class="mb-6 p-4 border border-gray-200 rounded-lg">
+            <h3 class="text-lg font-medium text-gray-700 mb-4">Profilna slika</h3>
+            <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                    {#if imagePreview}
+                        <img
+                            src={imagePreview}
+                            alt="Profile preview"
+                            class="w-32 h-32 object-cover rounded-lg border border-gray-300"
+                        />
+                    {:else if updatedDoctor.profile_image}
+                        <img
+                            src={updatedDoctor.profile_image}
+                            alt="Current profile"
+                            class="w-32 h-32 object-cover rounded-lg border border-gray-300"
+                        />
+                    {:else}
+                        <div class="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <span class="text-gray-500">Nema slike</span>
+                        </div>
+                    {/if}
+                </div>
+                <div class="flex-grow space-y-4">
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onchange={handleImageChange}
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                    />
+                    <button
+                        type="button"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transform transition-transform duration-150 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                        onclick={uploadProfileImage}
+                        disabled={!imageFile || uploadingImage}
+                    >
+                        {#if uploadingImage}
+                            <svg class="animate-spin h-5 w-5 text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C3.164 0 0 3.164 0 12h4z"></path>
+                            </svg>
+                            Uploading...
+                        {:else}
+                            Promijenite sliku
+                        {/if}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <form onsubmit={updateDoctor} class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <label class="block">
                     <span class="text-gray-600">Ime:</span>
@@ -181,7 +278,7 @@ async function deleteReview(reviewId) {
         <button
             type="button"
             class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transform transition-transform duration-150 active:scale-95 flex items-center justify-center"
-            on:click={deleteDoctor}
+            onclick={deleteDoctor}
             disabled={loadingDoctor}
         >
             {#if loadingDoctor}
@@ -206,7 +303,7 @@ async function deleteReview(reviewId) {
                         Ocjena #{index + 1}
                     </h3>
                     <form
-                        on:submit|preventDefault={() =>
+                        onsubmit={(ev) =>{ev.preventDefault();
                             updateReview(review.id, {
                                 comment: review.comment,
                                 ratinginstitution: review.ratinginstitution,
@@ -216,7 +313,7 @@ async function deleteReview(reviewId) {
                                 created_by: review.created_by,
                                 email: review.email,
                             })
-                        }
+                        }}
                         class="space-y-4 mt-4"
                     >
                         <label class="block">
@@ -312,7 +409,7 @@ async function deleteReview(reviewId) {
                     <button
                         type="button"
                         class="px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 transform transition-transform duration-150 active:scale-95 flex items-center justify-center"
-                        on:click={() => deleteReview(review.id)}
+                        onclick={() => deleteReview(review.id)}
                         disabled={loadingReviews[review.id]}
                     >
                         {#if loadingReviews[review.id]}

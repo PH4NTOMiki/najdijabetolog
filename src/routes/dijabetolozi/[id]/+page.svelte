@@ -102,7 +102,7 @@
     <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8 mb-12">
         <div class="w-40 h-40 md:w-60 md:h-60 bg-blue-100 rounded-full flex-shrink-0 overflow-hidden">
             <img
-                src={`https://placehold.co/150x150@2x.png?text=${data.doctor.first_name}`}
+                src={data.doctor.profile_picture || `https://placehold.co/150x150@2x.png?text=${data.doctor.first_name}`}
                 alt="{data.doctor.first_name} {data.doctor.last_name}"
                 class="w-full h-full object-cover"
             />
