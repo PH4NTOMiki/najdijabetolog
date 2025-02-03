@@ -41,5 +41,5 @@ export const POST = async ({ request }) => {
   const imgUrl = db.storage.from('profile-pics').getPublicUrl(data.path).data.publicUrl;
   console.log('imgUrl', imgUrl);
   console.log(await db.from('doctors').update({ profile_picture: imgUrl }).eq('id', doctorId));
-  return json({ message: 'File uploaded successfully!', data });
+  return json({ message: 'File uploaded successfully!', data, imageUrl: imgUrl });
 };
