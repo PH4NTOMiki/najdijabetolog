@@ -42,7 +42,7 @@
             errorMessage = '';
             // Update the doctor's image URL if returned in the response
             if (result.imageUrl) {
-                updatedDoctor.profile_image = result.imageUrl;
+                updatedDoctor.profile_picture = result.imageUrl;
             }
         } catch (err) {
             errorMessage = `Failed to update profile image: ${err.message}`;
@@ -172,9 +172,9 @@ async function deleteReview(reviewId) {
                             alt="Profile preview"
                             class="w-32 h-32 object-cover rounded-lg border border-gray-300"
                         />
-                    {:else if updatedDoctor.profile_image}
+                    {:else if updatedDoctor.profile_picture}
                         <img
-                            src={updatedDoctor.profile_image}
+                            src={updatedDoctor.profile_picture}
                             alt="Current profile"
                             class="w-32 h-32 object-cover rounded-lg border border-gray-300"
                         />
