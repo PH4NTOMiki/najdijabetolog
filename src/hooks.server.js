@@ -43,7 +43,7 @@ export async function handle({ event, resolve }) {
     
     if (event.url.pathname.startsWith('/admin')) {
         if (!event.locals.user) {
-            if(event.url.pathname!='/admin/prijava') return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + '/admin/prijava'+(event.url.pathname.length>12?('?to=' + event.url.pathname.slice(12) + event.url.search):''), 302);
+            if(event.url.pathname!='/admin/prijava') return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + '/admin/prijava'+(event.url.pathname.length>6?('?to=' + event.url.pathname.slice(6) + event.url.search):''), 302);
         } else {
             if(event.url.pathname=='/admin/prijava') return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + '/admin', 302);
         }
