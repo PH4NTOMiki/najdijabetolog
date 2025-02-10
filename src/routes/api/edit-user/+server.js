@@ -28,14 +28,14 @@ export async function POST({ request, locals }) {
         // @ts-ignore
         if (user.delete) {
             const { error: deleteError } = await db
-            .from('store_users')
+            .from('najd_users')
             .delete()
             .eq('id', user.id);
             if (deleteError) throw deleteError;
             return json({ success: true, message: 'Korisnik uspješno izbrisan' });
         } else {
             const { error: updateError } = await db
-            .from('store_users')
+            .from('najd_users')
             .update(_user)
             .eq('id', user.id);
             if (updateError) throw updateError;
@@ -50,7 +50,7 @@ export async function POST({ request, locals }) {
         /** @type {{data: App.Locals["user"]}} */
         // @ts-ignore
         const { data, error: insertError } = await db
-          .from('store_users')
+          .from('najd_users')
           .insert(_user)
           .select()
           .single();

@@ -7,7 +7,7 @@ export async function load({ locals }) {
     
     /** @type {{data: App.Locals["user"][]}} */
     // @ts-ignore
-    const { data: users } = await db.from('store_users').select('*');
+    const { data: users } = await db.from('najd_users').select('*');
     if (users) {
 		  // @ts-ignore
       return {users: users.map(user => {delete user.password;return user})};

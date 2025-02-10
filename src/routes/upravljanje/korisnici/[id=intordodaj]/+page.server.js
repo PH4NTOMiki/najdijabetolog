@@ -8,7 +8,7 @@ export async function load({ locals, params }) {
     
   /** @type {{data: App.Locals["user"]}} */
   // @ts-ignore
-  const { data: userEdit } = await db.from('store_users').select('*').eq('id', params.id).limit(1).single();
+  const { data: userEdit } = await db.from('najd_users').select('*').eq('id', params.id).limit(1).single();
   if (userEdit) {
     // @ts-ignore
     delete userEdit.password;

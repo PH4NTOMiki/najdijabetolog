@@ -5,7 +5,7 @@ import { db } from '$lib/db-server';
  * @returns {Promise<App.Locals["user"]>}
  */
 export async function findUserByUsernameWithPassword(username) {
-    const { data: user } = await db.from('store_users').select('*').eq('username', username).limit(1).single();
+    const { data: user } = await db.from('najd_users').select('*').eq('username', username).limit(1).single();
     return user;
 }
 
