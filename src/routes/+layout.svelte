@@ -19,7 +19,7 @@
 
   async function handleLogout() {
     await logout();
-    goto('/upravljanje/prijava');
+    goto('/admin/prijava');
   }
 
   function toggleMenu() {
@@ -168,7 +168,7 @@
       </div>
     </div>
 
-    {#if $page.url.pathname.startsWith('/upravljanje') && $user}
+    {#if $page.url.pathname.startsWith('/admin') && $user}
       <div class="flex flex-wrap items-center justify-end gap-2 ml-auto">
         {#if $user.role === 'admin'}
           <a href="/upravljanje/korisnici" class="btn btn-ghost text-xl">Korisnici</a>
