@@ -10,7 +10,7 @@
 
     async function handleSubmit() {
         if (await login(username, password)) {
-            await goto(`/admin${new URL(location.href).searchParams.get('to') ?? ''}`, { invalidateAll: true });
+            await goto(`/admin${new URL(location.href).searchParams.get('to') ?? '/dijabetolozi'}`, { invalidateAll: true });
         } else {
             alert('Login failed');
         }

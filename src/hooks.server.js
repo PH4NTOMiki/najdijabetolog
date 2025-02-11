@@ -41,11 +41,12 @@ export async function handle({ event, resolve }) {
         }
     }
     
-    if (event.url.pathname.startsWith('/admin')) {
+    const adminPrefix = '/admin';
+    if (event.url.pathname.startsWith(adminPrefix)) {
         if (!event.locals.user) {
-            if(event.url.pathname!='/admin/prijava') return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + '/admin/prijava'+(event.url.pathname.length>6?('?to=' + event.url.pathname.slice(6) + event.url.search):''), 302);
+            if(event.url.pathname!=`${adminPrefix}/prijava`) return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + `${adminPrefix}/prijava`+(event.url.pathname.length>adminPrefix.length?('?to=' + event.url.pathname.slice(adminPrefix.length) + event.url.search):''), 302);
         } else {
-            if(event.url.pathname=='/admin/prijava') return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + '/admin', 302);
+            if(event.url.pathname==`${adminPrefix}/prijava`) return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + `${adminPrefix}/dijabetolozi`, 302);
         }
     }
 
