@@ -46,7 +46,7 @@ export async function handle({ event, resolve }) {
         if (!event.locals.user) {
             if(event.url.pathname!=`${adminPrefix}/prijava`) return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + `${adminPrefix}/prijava`+(event.url.pathname.length>adminPrefix.length?('?to=' + event.url.pathname.slice(adminPrefix.length) + event.url.search):''), 302);
         } else {
-            if(event.url.pathname==`${adminPrefix}/prijava`) return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + `${adminPrefix}/dijabetolozi`, 302);
+            if(event.url.pathname==`${adminPrefix}/prijava` || event.url.pathname==adminPrefix) return Response.redirect(event.url.href.split('/').slice(0,3).join('/') + `${adminPrefix}/dijabetolozi`, 302);
         }
     }
 
