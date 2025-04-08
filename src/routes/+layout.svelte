@@ -2,7 +2,7 @@
   import "../app.css";
   import { user, logout } from "$lib/auth";
   import { goto } from "$app/navigation";
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { browser } from '$app/environment';
   import { fetchCache } from "$lib/db";
   import { LogOut, Menu, X, Search } from "lucide-svelte";
@@ -168,7 +168,7 @@
       </div>
     </div>
 
-    {#if $page.url.pathname.startsWith('/admin') && $user}
+    {#if page.url.pathname.startsWith('/admin') && $user}
       <div class="flex flex-wrap items-center justify-end gap-2 ml-auto">
         {#if $user.role === 'admin'}
           <a href="/admin/korisnici" class="btn btn-ghost text-xl">Korisnici</a>

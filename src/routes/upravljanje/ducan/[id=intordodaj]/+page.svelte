@@ -2,7 +2,7 @@
     import { preventDefault } from 'svelte/legacy';
 
     import { goto, invalidate } from '$app/navigation';
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
 	import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
 
@@ -23,10 +23,10 @@
 
     let formError = $state('');
     let formSuccess = $state('');
-    let isDeleteModalOpen = $state($page.url.hash === '#izbrisi');
+    let isDeleteModalOpen = $state(page.url.hash === '#izbrisi');
 
     onMount(() => {
-        // now using $page.url.hash instead of location.hash when setting isDeleteModalOpen
+        // now using page.url.hash instead of location.hash when setting isDeleteModalOpen
         //if (location.hash === '#izbrisi') isDeleteModalOpen = true;
     });
 
