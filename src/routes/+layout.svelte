@@ -99,7 +99,7 @@
     <!-- Logo and Search Icon (Mobile) -->
     <div class="flex flex-1 items-center gap-2 min-w-0">
       <a href={$user ? `/admin/dijabetolozi` : `/`} class="max-w-[75%] lg:max-w-96">
-        <img src="https://storage.mikitvba.com/2b65dda3-d847-41e1-943c-26f547b1855f.png" alt="Logo" />
+        <img src="/najdijabetolog-logo-top.png" alt="Logo" />
       </a>
     </div>
 
