@@ -4,6 +4,7 @@
 
     // Helper function to generate an array of stars
     function renderStars(/** @type {number} */rating) {
+        if (!rating) return [];
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             if (rating >= i) {
@@ -55,7 +56,7 @@ Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njiho
                         <p class="text-gray-600 italic">{doctor.institution?.name}</p>
                         <!-- Overall Rating -->
                         <div>
-                            <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {doctor.rating.toFixed(1)} - Ukupna ocjena</p>
+                            <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {!doctor.rating ? 'Bez ocjene' : doctor.rating.toFixed(1)} - Ukupna ocjena</p>
 
                             <!-- Ratings by Category -->
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -67,7 +68,7 @@ Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njiho
                                 ] as category}
                                     <div class="text-center">
                                         <p class="text-sm text-gray-600">{category.label}</p>
-                                        <div class="flex justify-center space-x-1 mt-1" aria-label={`Rating: ${category.rating} out of 5`}>
+                                        <div class="flex justify-center space-x-1 mt-1" aria-label={!category.rating ? 'Bez ocjene' : `Rating: ${category.rating} out of 5`}>
                                             {#each renderStars(category.rating) as type}
                                                 {#if type === 'half'}
                                                     <!-- Half-Filled Star -->
@@ -114,7 +115,7 @@ Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njiho
                                                 {/if}
                                             {/each}
                                         </div>
-                                        <p class="text-sm text-gray-600">{category.rating.toFixed(1)}</p>
+                                        <p class="text-sm text-gray-600">{!category.rating ? 'Bez ocjene' : category.rating.toFixed(1)}</p>
                                     </div>
                                 {/each}
                             </div>

@@ -117,7 +117,7 @@
 
             <!-- Overall Rating -->
             <div>
-                <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {data.doctor.rating.toFixed(1)} - Ukupna ocjena</p>
+                <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {!data.doctor.rating ? 'Bez ocjene' : data.doctor.rating.toFixed(1)} - Ukupna ocjena</p>
 
                 <!-- Ratings by Category -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -176,7 +176,7 @@
                                     {/if}
                                 {/each}
                             </div>
-                            <p class="text-sm text-gray-600 dark-disabled:text-gray-200">{category.rating.toFixed(1)}</p>
+                            <p class="text-sm text-gray-600 dark-disabled:text-gray-200">{!category.rating ? 'Bez ocjene' : category.rating.toFixed(1)}</p>
                         </div>
                     {/each}
                 </div>

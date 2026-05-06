@@ -4,6 +4,7 @@
 
     // Helper function to generate an array of stars
     function renderStars(/** @type {number} */rating) {
+        if (!rating) return [];
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             if (rating >= i) {
@@ -25,7 +26,7 @@
         <h1 class="text-4xl font-bold text-gray-800">{data.institution.name}</h1>
         <p class="text-gray-600 text-lg">{data.institution.city.name}</p>
         <p class="text-gray-600 text-lg">{data.institution.bio}</p>
-        <p class="text-yellow-500 font-bold text-xl mt-2">⭐ {data.institution.rating.toFixed(1)}</p>
+        <p class="text-yellow-500 font-bold text-xl mt-2">⭐ {!data.institution.rating ? 'Bez ocjene' : data.institution.rating.toFixed(1)}</p>
     </div>
 
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Dijabetolozi u ustanovi {data.institution.name}</h2>
@@ -39,7 +40,7 @@
                     <p class="text-gray-600 italic">{doctor.institution.name}</p>
                     <!-- Overall Rating -->
                     <div>
-                        <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {doctor.rating.toFixed(1)} - Ukupna ocjena</p>
+                        <p class="text-yellow-500 font-bold text-xl mb-2">⭐ {!doctor.rating ? 'Bez ocjene' : doctor.rating.toFixed(1)} - Ukupna ocjena</p>
 
                         <!-- Ratings by Category -->
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -98,7 +99,7 @@
                                             {/if}
                                         {/each}
                                     </div>
-                                    <p class="text-sm text-gray-600">{category.rating.toFixed(1)}</p>
+                                    <p class="text-sm text-gray-600">{!category.rating ? 'Bez ocjene' : category.rating.toFixed(1)}</p>
                                 </div>
                             {/each}
                         </div>
