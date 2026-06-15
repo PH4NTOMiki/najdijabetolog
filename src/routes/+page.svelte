@@ -33,7 +33,29 @@ Misija portala <strong>NajDijabetolog</strong> je unapređenje dijabetološke sk
 Pružamo korisne informacije osobama s dijabetesom, ali i dijabetolozima o njihovim vrlinama te prostoru za poboljšanje.
 </h4>
 
-<h1 class="text-3xl font-extrabold text-center my-8 text-gray-800 dark-disabled:text-gray-300">Otkrijte najbolje dijabetologe u Vašem gradu</h1>
+<section class="flex flex-col items-center justify-center px-4 py-20 mx-auto max-w-4xl text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+        Pronađite dijabetologa prema iskustvima drugih pacijenata.
+    </h1>
+    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+        Ocijenite svog dijabetologa i pomozite drugim osobama s dijabetesom da lakše pronađu kvalitetnu skrb.
+    </p>
+
+    <div class="flex flex-col items-center w-full gap-4">
+        
+        <a href="/dijabetolozi" class="w-full md:w-auto px-10 py-4 bg-blue-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-blue-700 hover:-translate-y-1 transition-all duration-200">
+            Pronađi dijabetologa
+        </a>
+
+        <a href="/dijabetolozi" class="w-full md:w-auto px-8 py-3 bg-white text-blue-600 border-2 border-blue-600 font-semibold text-base rounded-xl hover:bg-blue-50 transition-all duration-200">
+            Ocijeni svog dijabetologa
+        </a>
+
+        <a href="/prijavi-gresku" class="mt-4 text-sm text-gray-500 underline hover:text-gray-800 transition-colors duration-200">
+            Dodaj dijabetologa kojeg nema na popisu
+        </a>
+    </div>
+</section>
 
 <div class="container mx-auto px-4 space-y-16">
 
